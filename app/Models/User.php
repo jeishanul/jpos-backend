@@ -17,6 +17,18 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $guarded = ['id'];
+
+    protected $guard_name = ['web'];
+
+    protected $dates = ['deleted_at'];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'status' => Status::class,
+    ];
+
+
     protected $fillable = [
         'name',
         'email',
@@ -38,8 +50,4 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
 }
