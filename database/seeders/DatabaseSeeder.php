@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +13,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            UserSeeder::class,
+            CategorySeeder::class,
+        ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->installStorageLink();
+    }
+
+    private function installStorageLink()
+    {
+        $this->command->warn('Installing storage link');
+        Artisan::call('storage:link');
+        $this->command->info('Storage link installed');
     }
 }
