@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             UnitSeeder::class,
             TaxSeeder::class,
+            ProductSeeder::class,
         ]);
 
         $this->installStorageLink();
