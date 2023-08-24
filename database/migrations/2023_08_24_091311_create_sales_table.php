@@ -23,7 +23,7 @@ return new class extends Migration
             $table->double('discount')->default(0);
             $table->double('total')->default(0);
             $table->double('transportation_cost')->default(0);
-            $table->string('purchase_status');
+            $table->string('discount_type')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
