@@ -27,6 +27,7 @@ class PurchaseFactory extends Factory
             'supplier_id' => $supplier->id,
             'media_id' => Media::factory()->create(),
             'date' => $this->faker->date(),
+            'batch_no' => random_int(1000000000, 9999999999),
             'invoice_no' => random_int(1000000000, 9999999999),
             'payable' => $this->faker->randomFloat(),
             'due' => $this->faker->randomFloat(),

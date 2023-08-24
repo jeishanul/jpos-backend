@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('supplier_id')->nullable()->constrained((new User())->getTable());
             $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable()); // attachment
             $table->timestamp('date');
+            $table->string('batch_no');
             $table->string('invoice_no');
             $table->double('payable')->default(0);
             $table->double('due')->default(0);
