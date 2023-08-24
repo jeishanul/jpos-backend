@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Purchase;
 use App\Repositories\ProductRepository;
-use App\Repositories\PurchaseRepository;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +18,6 @@ class PurchaseProductFactory extends Factory
      */
     public function definition(): array
     {
-        $purchase = $this->faker->randomElement((new PurchaseRepository)->getAll());
         $product = $this->faker->randomElement((new ProductRepository)->query()->where('status','Active')->get());
 
         $codes = [];
@@ -27,7 +26,7 @@ class PurchaseProductFactory extends Factory
         }
 
         return [
-            'purchase_id' => $purchase->id,
+            'purchase_id' => Purchase::factory()->create(),
             'product_id' => $product->id,
             'price' => $this->faker->randomFloat(),
             'code' => json_encode($codes),
