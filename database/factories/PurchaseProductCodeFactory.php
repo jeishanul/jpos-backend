@@ -18,12 +18,10 @@ class PurchaseProductCodeFactory extends Factory
      */
     public function definition(): array
     {
-        for ($i = 1; $i <= 5; $i++) {
-            return [
-                'purchase_product_id' => PurchaseProduct::factory()->create(),
-                'code' => random_int(1000000000, 9999999999),
-                'sale_type' => $this->faker->randomElement(SaleType::cases()),
-            ];
-        }
+        return [
+            'purchase_product_id' => PurchaseProduct::factory()->create(),
+            'code' => random_int(1000000000, 9999999999),
+            'sale_type' => $this->faker->randomElement(SaleType::cases()),
+        ];
     }
 }

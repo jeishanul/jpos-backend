@@ -18,11 +18,11 @@ class SaleFactory extends Factory
     public function definition(): array
     {
         $user = $this->faker->randomElement((new UserRepository)->query()->where('role','Admin')->get());
-        $supplier = $this->faker->randomElement((new UserRepository)->query()->where('role','Customer')->get());
+        $customer = $this->faker->randomElement((new UserRepository)->query()->where('role','Customer')->get());
 
         return [
             'user_id' => $user->id,
-            'supplier_id' => $supplier->id,
+            'customer_id' => $customer->id,
             'date' => $this->faker->date(),
             'invoice_no' => random_int(1000000000, 9999999999),
             'payable' => $this->faker->randomFloat(),

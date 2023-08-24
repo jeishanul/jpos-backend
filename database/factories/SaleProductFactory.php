@@ -18,11 +18,11 @@ class SaleProductFactory extends Factory
      */
     public function definition(): array
     {
-        $purchaseProductCode = $this->faker->randomElement((new PurchaseProductCodeRepository)->getAll());
-        
+        $purchaseProductCode = $this->faker->randomElement((new PurchaseProductCodeRepository)->query()->where('sale_type','Sale')->get());
+
         return [
             'sale_id' => Sale::factory()->create(),
-            'product_id' => $purchaseProductCode->product->id,
+            'purchase_product_code_id' => $purchaseProductCode->purchaseProduct->id,
             'price' => $this->faker->randomFloat(),
             'code' => $purchaseProductCode->code,
         ];

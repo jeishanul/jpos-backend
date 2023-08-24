@@ -18,4 +18,9 @@ class PurchaseProductCode extends Model
     protected $casts = [
         'sale_type' => SaleType::class,
     ];
+
+    public function purchaseProduct()
+    {
+    	return $this->belongsTo(PurchaseProduct::class,'purchase_product_id');
+    }
 }

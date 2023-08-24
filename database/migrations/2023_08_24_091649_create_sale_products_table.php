@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Product;
+use App\Models\PurchaseProductCode;
 use App\Models\Sale;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('sale_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('sale_id')->nullable()->constrained((new Sale())->getTable());
-            $table->foreignId('product_id')->nullable()->constrained((new Product())->getTable());
+            $table->foreignId('purchase_product_code_id')->nullable()->constrained((new PurchaseProductCode())->getTable());
             $table->double('price');
             $table->longText('code');
             $table->timestamps();
