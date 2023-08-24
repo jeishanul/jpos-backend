@@ -18,7 +18,7 @@ class TaxFactory extends Factory
      */
     public function definition(): array
     {
-        $user = $this->faker->randomElement((new UserRepository)->getAll());
+        $user = $this->faker->randomElement((new UserRepository)->query()->where('role','Admin')->get());
 
         return [
             'user_id' => $user->id,

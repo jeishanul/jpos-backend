@@ -19,7 +19,7 @@ class PurchaseProductFactory extends Factory
     public function definition(): array
     {
         $purchase = $this->faker->randomElement((new PurchaseRepository)->getAll());
-        $product = $this->faker->randomElement((new ProductRepository)->getAll());
+        $product = $this->faker->randomElement((new ProductRepository)->query()->where('status','Active')->get());
 
         $codes = [];
         for ($i = 1; $i <= 5; $i++) {

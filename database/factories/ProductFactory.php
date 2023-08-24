@@ -24,11 +24,11 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $user = $this->faker->randomElement((new UserRepository)->getAll());
-        $category = $this->faker->randomElement((new CategoryRepository)->getAll());
-        $tax = $this->faker->randomElement((new TaxRepository)->getAll());
-        $brand = $this->faker->randomElement((new BrandRepository)->getAll());
-        $unit = $this->faker->randomElement((new UnitRepository)->getAll());
+        $user = $this->faker->randomElement((new UserRepository)->query()->where('role','Admin')->get());
+        $category = $this->faker->randomElement((new CategoryRepository)->query()->where('status','Active')->get());
+        $tax = $this->faker->randomElement((new TaxRepository)->query()->where('status','Active')->get());
+        $brand = $this->faker->randomElement((new BrandRepository)->query()->where('status','Active')->get());
+        $unit = $this->faker->randomElement((new UnitRepository)->query()->where('status','Active')->get());
 
         return [
             'user_id' => $user->id,
