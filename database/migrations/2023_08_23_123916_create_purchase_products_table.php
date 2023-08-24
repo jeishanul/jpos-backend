@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('purchase_id')->nullable()->constrained((new Purchase())->getTable());
             $table->foreignId('product_id')->nullable()->constrained((new Product())->getTable());
             $table->double('price');
-            $table->longText('code');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Repositories\PurchaseProductRepository;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,15 @@ class PurchaseProductCodeFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            //
-        ];
+        $purchaseProduct = $this->faker->randomElement((new PurchaseProductRepository)->getAll());
+
+        for ($i = 1; $i <= 5; $i++) {
+            return [
+                'purchase_product_id' => $purchaseProduct->id,
+                'code' => random_int(1000000000, 9999999999),
+            ];
+        }
+
+        
     }
 }
