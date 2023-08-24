@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('purchase_product_id')->nullable()->constrained((new PurchaseProduct())->getTable());
             $table->string('sale_type');
+            $table->longText('code');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Sale;
+use App\Repositories\PurchaseProductCodeRepository;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,11 +18,13 @@ class SaleProductFactory extends Factory
      */
     public function definition(): array
     {
+        $purchaseProductCode = $this->faker->randomElement((new PurchaseProductCodeRepository)->getAll());
+        
         return [
-            'purchase_id' => Sale::factory()->create(),
-            'product_id' => $product->id,
+            'sale_id' => Sale::factory()->create(),
+            'product_id' => $purchaseProductCode->product->id,
             'price' => $this->faker->randomFloat(),
-            'code' => json_encode($codes),
+            'code' => $purchaseProductCode->code,
         ];
     }
 }
