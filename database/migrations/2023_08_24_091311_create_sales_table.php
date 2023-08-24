@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Media;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,13 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('supplier_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable()); // attachment
+            $table->foreignId('customer_id')->nullable()->constrained((new User())->getTable());
             $table->timestamp('date');
-            $table->string('batch_no');
             $table->string('invoice_no');
             $table->double('payable')->default(0);
             $table->double('due')->default(0);
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('sales');
     }
 };
