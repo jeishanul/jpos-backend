@@ -17,13 +17,12 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ShopCategorySeeder::class,
             ShopSeeder::class,
+            ShopUserSeeder::class,
             CategorySeeder::class,
             BrandSeeder::class,
             UnitSeeder::class,
             TaxSeeder::class,
             ProductSeeder::class,
-            // PurchaseProductCodeSeeder::class,
-            // SaleProductseeder::class,
         ]);
 
         $this->installStorageLink();
