@@ -6,7 +6,7 @@ use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
-class CategoryStoreRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,14 +19,19 @@ class CategoryStoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
+        $method = request()->isMethod('put');
+        $isImageRequired = 'required';
+        if ($method) {
+            $isImageRequired = 'nullable';
+        }
         return [
-            'name' => 'required|max:255',
+            'name' => 'required|string|max:255',
+            'image' => $isImageRequired . '|mimes:jpg,jpeg,png,gif|max:2048',
             'parent_id' => 'nullable|integer',
-            'image' => 'required|mimes:jpg,jpeg,png,gif',
             'status' => ['required', new Enum(Status::class)]
         ];
     }

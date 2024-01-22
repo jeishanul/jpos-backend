@@ -2,58 +2,55 @@
 
 namespace App\Repositories;
 
-use App\Http\Requests\CategoryStoreRequest;
-use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 
 class CategoryRepository extends Repository
 {
-    private $path = '/category';
+    public static $path = '/category';
 
-    public function model()
+    public static function model()
     {
         return Category::class;
     }
-
-    public function storeByRequest(CategoryStoreRequest $request)
+    public static function storeByRequest(CategoryRequest $request): Category
     {
-        $mediaId = null;
+        $thumbnailId = null;
         if ($request->hasFile('image')) {
-            $media = (new MediaRepository())->storeByRequest(
+            $thumbnail = MediaRepository::storeByRequest(
                 $request->image,
-                $this->path,
+                self::$path,
                 'Image'
             );
-            $mediaId = $media->id;
+            $thumbnailId = $thumbnail->id;
         }
 
-        return $this->create([
-            'user_id' => auth()->id(),
+        return self::create([
+            'created_by' => auth()->id(),
+            'shop_id' => self::mainShop()->id,
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'media_id' => $mediaId,
-            'status' => $request->status,
+            'thumbnail_id' => $thumbnailId,
         ]);
     }
-
-    public function updateByRequest(CategoryUpdateRequest $request, Category $category)
+    public static function updateByRequest(CategoryRequest $request, Category $category): Category
     {
-        $mediaId = null;
+        $thumbnailId = null;
         if ($request->hasFile('image')) {
-            $media = (new MediaRepository())->updateByRequest(
+            $thumbnail = MediaRepository::updateOrCreateByRequest(
                 $request->image,
-                $this->path,
+                self::$path,
                 'Image',
-                $category->media
+                $category->thumbnail
             );
-            $mediaId = $media->id;
+            $thumbnailId = $thumbnail->id;
         }
-        
-        return $this->update($category, [
+
+        self::update($category, [
             'name' => $request->name,
             'parent_id' => $request->parent_id,
-            'media_id' => $mediaId ? $mediaId : $category->media_id,
-            'status' => $request->status,
+            'thumbnail_id' => $thumbnailId ? $thumbnailId : $category->thumbnail_id,
         ]);
+        return $category;
     }
 }

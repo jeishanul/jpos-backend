@@ -8,65 +8,71 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class Repository
 {
-    /**
-     * Define relevant model
-     *
-     * @return Model|Builder
-     */
-    abstract public function model();
+    abstract public static function model();
 
-    public function query(): Builder
+    public static function query(): Builder
     {
-        return $this->model()::query();
+        return static::model()::query();
     }
 
-    public function getAll()
+    public static function getAll(): Collection
     {
-        return $this->query()->get();
+        return static::model()::latest()->get();
     }
 
     /**
      * @return Builder|Model|object|null
      */
-    public function first()
+    public static function first(): Model|null
     {
-        return $this->query()->first();
+        return static::query()->first();
     }
 
     /**
      * @return Builder|Builder[]|Collection|Model|null|mixed
      */
-    public function find($primaryKey)
+    public static function find($primaryKey): Model|null
     {
-        return $this->query()->find($primaryKey);
+        return static::query()->find($primaryKey);
     }
 
     /**
      * @return Builder|Builder[]|Collection|Model|null|mixed
      */
-    public function findOrFail($primaryKey)
+    public static function findOrFail($primaryKey)
     {
-        return $this->query()->findOrFail($primaryKey);
+        return static::query()->findOrFail($primaryKey);
     }
 
-    public function delete($primaryKey)
+    public static function delete($primaryKey): bool
     {
-        return $this->query()->destroy($primaryKey);
+        return static::model()::destroy($primaryKey);
     }
 
     /**
      * @return Builder|Model|mixed
      */
-    public function create(array $data)
+    public static function create(array $data): Model
     {
-        return $this->query()->create($data);
+        return static::query()->create($data);
     }
 
     /**
      * @return bool
      */
-    public function update(Model $model, array $data)
+    public static function update(Model $model, array $data): bool
     {
         return $model->update($data);
+    }
+
+    protected static function mainShop()
+    {
+        $user = auth()->user();
+        $mainShop = $user->shopUser->first();
+
+        return match ($mainShop) {
+            null => $user->shop,
+            default => $mainShop
+        };
     }
 }
