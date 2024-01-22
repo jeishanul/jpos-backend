@@ -15,13 +15,15 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            ShopCategorySeeder::class,
+            ShopSeeder::class,
             CategorySeeder::class,
             BrandSeeder::class,
             UnitSeeder::class,
             TaxSeeder::class,
-            ProductSeeder::class,
-            PurchaseProductCodeSeeder::class,
-            SaleProductseeder::class,
+            // ProductSeeder::class,
+            // PurchaseProductCodeSeeder::class,
+            // SaleProductseeder::class,
         ]);
 
         $this->installStorageLink();

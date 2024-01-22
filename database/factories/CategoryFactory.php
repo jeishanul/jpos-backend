@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\Status;
 use App\Models\Media;
-use App\Repositories\UserRepository;
+use App\Models\Shop;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,10 +19,10 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $user = $this->faker->randomElement((new UserRepository)->query()->where('role','Admin')->get());
-
+        $shops = Shop::where('status', 'Active')->get();
         return [
-            'user_id' => $user->id,
+            'user_id' => $this->faker->randomElement($shops)->user_id,
+            'shop_id' => $this->faker->randomElement($shops)->id,
             'name' => $this->faker->name,
             'parent_id' => 1,
             'media_id' => Media::factory()->create(),

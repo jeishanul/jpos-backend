@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Media;
+use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,6 +17,7 @@ return new class extends Migration
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
+            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->string('name');
             $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
             $table->string('status');

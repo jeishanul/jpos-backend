@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Shop;
+use App\Models\ShopCategory;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('taxes', function (Blueprint $table) {
+        Schema::create('shops', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
+            $table->foreignId('shop_category_id')->nullable()->constrained((new ShopCategory())->getTable());
             $table->string('name');
-            $table->string('rate');
+            $table->longText('description')->nullable();
             $table->string('status');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('taxes');
+        Schema::dropIfExists('shops');
     }
 };

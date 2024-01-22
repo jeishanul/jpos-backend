@@ -3,6 +3,7 @@
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Media;
+use App\Models\Shop;
 use App\Models\Tax;
 use App\Models\Unit;
 use App\Models\User;
@@ -20,6 +21,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
+            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->string('name');
             $table->string('code');
             $table->string('model')->nullable();
