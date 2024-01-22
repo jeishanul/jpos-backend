@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             UnitSeeder::class,
             TaxSeeder::class,
-            // ProductSeeder::class,
+            ProductSeeder::class,
             // PurchaseProductCodeSeeder::class,
             // SaleProductseeder::class,
         ]);

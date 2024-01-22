@@ -4,12 +4,11 @@ namespace Database\Factories;
 
 use App\Enums\DiscountType;
 use App\Enums\Status;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Media;
-use App\Repositories\BrandRepository;
-use App\Repositories\CategoryRepository;
-use App\Repositories\TaxRepository;
-use App\Repositories\UnitRepository;
-use App\Repositories\UserRepository;
+use App\Models\Tax;
+use App\Models\Unit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,21 +23,20 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        $user = $this->faker->randomElement((new UserRepository)->query()->where('role','Admin')->get());
-        $category = $this->faker->randomElement((new CategoryRepository)->query()->where('status','Active')->get());
-        $tax = $this->faker->randomElement((new TaxRepository)->query()->where('status','Active')->get());
-        $brand = $this->faker->randomElement((new BrandRepository)->query()->where('status','Active')->get());
-        $unit = $this->faker->randomElement((new UnitRepository)->query()->where('status','Active')->get());
-
+        $categoryIds = Category::where(['shop_id' => 1, 'status' => 'Active'])->get()->pluck('id')->toArray();
+        $brandIds = Brand::where(['shop_id' => 1, 'status' => 'Active'])->get()->pluck('id')->toArray();
+        $taxIds = Tax::where(['shop_id' => 1, 'status' => 'Active'])->get()->pluck('id')->toArray();
+        $unitIds = Unit::where(['shop_id' => 1, 'status' => 'Active'])->get()->pluck('id')->toArray();
         return [
-            'user_id' => $user->id,
+            'user_id' => 2,
+            'shop_id' => 1,
             'name' => $this->faker->name,
             'code' => random_int(1000000000, 9999999999),
             'model' => $this->faker->name,
-            'category_id' => $category->id,
-            'tax_id' => $tax->id,
-            'brand_id' => $brand->id,
-            'unit_id' => $unit->id,
+            'category_id' => $this->faker->randomElement($categoryIds),
+            'tax_id' => $this->faker->randomElement($taxIds),
+            'brand_id' => $this->faker->randomElement($brandIds),
+            'unit_id' => $this->faker->randomElement($unitIds),
             'price' => $this->faker->randomFloat(),
             'alert_qty' => $this->faker->randomDigit(),
             'discount' => $this->faker->randomDigit(),

@@ -13,6 +13,41 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(25)->create();
+        $this->superAdmin();
+        $this->admin();
+        $this->customer();
+        $this->supplier();
+    }
+    private function superAdmin()
+    {
+        User::factory()->create([
+            'name' => 'Demo Super Admin',
+            'email' => 'superadmin@demo.com',
+            'role' => 'Super Admin'
+        ]);
+    }
+    private function admin()
+    {
+        User::factory()->create([
+            'name' => 'Demo Admin',
+            'email' => 'admin@demo.com',
+            'role' => 'Admin'
+        ]);
+    }
+    private function customer()
+    {
+        User::factory()->create([
+            'name' => 'Demo Customer',
+            'email' => 'customer@demo.com',
+            'role' => 'Customer'
+        ]);
+    }
+    private function supplier()
+    {
+        User::factory()->create([
+            'name' => 'Demo Supplier',
+            'email' => 'supplier@demo.com',
+            'role' => 'Supplier'
+        ]);
     }
 }

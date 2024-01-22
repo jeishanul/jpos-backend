@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'role' => $this->faker->randomElement(Role::cases()),
             'phone_number' => $this->faker->phoneNumber(),
             'phone_number_verified_at' => null,
-            'status' => $this->faker->randomElement(Status::cases())
+            'status' => Status::ACTIVE->value
         ];
     }
 
