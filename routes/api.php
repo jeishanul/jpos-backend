@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\UserAuthenticationController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,5 +46,12 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{unit}', 'details');
         Route::post('store', 'store');
         Route::put('update/{unit}', 'update');
+    });
+    // Tax Route
+    Route::controller(TaxController::class)->prefix('tax')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{tax}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{tax}', 'update');
     });
 });
