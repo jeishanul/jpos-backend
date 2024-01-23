@@ -14,4 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('category', CategoryController::class);
+Route::middleware('auth:api')->group(function () {
+    // Category Route
+    Route::controller(CategoryController::class)->prefix('category')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{category}', 'details');
+        Route::post('store', 'store');
+        Route::put('update', 'update');
+    });
+});

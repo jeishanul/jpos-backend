@@ -9,7 +9,7 @@ use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -22,7 +22,7 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
 
-    protected $guard_name = ['web'];
+    protected $guard_name = ['api'];
 
     protected $dates = ['deleted_at'];
 

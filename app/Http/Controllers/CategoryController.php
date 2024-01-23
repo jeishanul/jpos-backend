@@ -25,7 +25,7 @@ class CategoryController extends Controller
             'category' => CategoryResource::make($category),
         ]);
     }
-    public function edit(Category $category)
+    public function details(Category $category)
     {
         return $this->json('Category successfully updated', [
             'category' => CategoryResource::make($category),
@@ -38,7 +38,7 @@ class CategoryController extends Controller
             'category' => CategoryResource::make($category),
         ]);
     }
-    public function delete(Category $category)
+    public function destroy(Category $category)
     {
         $category->delete();
         return $this->json('Category successfully deleted');
