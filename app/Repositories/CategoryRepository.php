@@ -53,6 +53,7 @@ class CategoryRepository extends Repository
             'status' => $categoryRequest->status,
             'media_id' => $mediaId ? $mediaId : $category->media_id,
         ]);
+        
         return $category;
     }
 }

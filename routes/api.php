@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\UserAuthenticationController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +35,15 @@ Route::middleware('auth:api')->group(function () {
     // Brand Route
     Route::controller(BrandController::class)->prefix('brand')->group(function () {
         Route::get('list', 'index');
-        Route::get('details/{category}', 'details');
+        Route::get('details/{brand}', 'details');
         Route::post('store', 'store');
-        Route::put('update/{category}', 'update');
+        Route::put('update/{brand}', 'update');
+    });
+    // Unit Route
+    Route::controller(UnitController::class)->prefix('unit')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{unit}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{unit}', 'update');
     });
 });

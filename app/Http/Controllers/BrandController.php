@@ -32,12 +32,14 @@ class BrandController extends Controller
     }
     public function update(BrandRequest $brandRequest, Brand $brand)
     {
-        BrandRepository::updateByRequest($brandRequest, $brand);
-        return back()->with('success', 'Brand successfully updated!');
+        $brand = BrandRepository::updateByRequest($brandRequest, $brand);
+        return $this->json('Brand successfully updated', [
+            'brand' => BrandResource::make($brand),
+        ]);
     }
     public function delete(Brand $brand)
     {
         $brand->delete();
-        return back()->with('success', 'Brand is deleted successfully!');
+        return $this->json('Brand successfully deleted');
     }
 }
