@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\UserAuthenticationController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,13 @@ Route::middleware('auth:api')->group(function () {
     Route::controller(CategoryController::class)->prefix('category')->group(function () {
         Route::get('list', 'index');
         Route::get('subcategory', 'subcategory');
+        Route::get('details/{category}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{category}', 'update');
+    });
+    // Brand Route
+    Route::controller(BrandController::class)->prefix('brand')->group(function () {
+        Route::get('list', 'index');
         Route::get('details/{category}', 'details');
         Route::post('store', 'store');
         Route::put('update/{category}', 'update');

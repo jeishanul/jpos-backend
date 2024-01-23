@@ -34,7 +34,7 @@ class CategoryController extends Controller
     }
     public function details(Category $category)
     {
-        return $this->json('Category successfully updated', [
+        return $this->json('Category Details', [
             'category' => CategoryResource::make($category),
         ]);
     }
