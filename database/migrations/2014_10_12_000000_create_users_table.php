@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Media;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->timestamp('phone_number_verified_at')->nullable();
             $table->string('role');
             $table->string('status');
+            $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
+            $table->string('slug');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -65,14 +65,14 @@ abstract class Repository
         return $model->update($data);
     }
 
-    protected static function mainShop()
+    protected static function shop()
     {
         $user = auth()->user();
-        $mainShop = $user->shopUser->first();
+        $shop = $user->shopUser->first();
 
-        return match ($mainShop) {
+        return match ($shop) {
             null => $user->shop,
-            default => $mainShop
+            default => $shop
         };
     }
 }

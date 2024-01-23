@@ -21,11 +21,10 @@ class Category extends Model
 
     public function media()
     {
-    	return $this->belongsTo(Media::class,'media_id');
+        return $this->belongsTo(Media::class);
     }
-
     public function parentCategory()
     {
-    	return $this->belongsTo(Category::class,'parent_id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 }

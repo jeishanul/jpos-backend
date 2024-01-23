@@ -55,8 +55,12 @@ class User extends Authenticatable
      * @var array<string, string>
      */
 
-     public function shops()
-     {
-         return $this->hasMany(Shop::class, 'user_id');
-     }
+    public function shops()
+    {
+        return $this->hasMany(Shop::class, 'user_id');
+    }
+    public function shopUser()
+    {
+        return $this->belongsToMany(Shop::class, 'shop_users');
+    }
 }
