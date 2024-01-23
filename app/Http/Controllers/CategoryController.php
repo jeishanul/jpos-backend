@@ -18,9 +18,9 @@ class CategoryController extends Controller
             'categories' => CategoryResource::collection($categories),
         ]);
     }
-    public function store(CategoryRequest $request)
+    public function store(CategoryRequest $categoryRequest)
     {
-        $category = CategoryRepository::storeByRequest($request);
+        $category = CategoryRepository::storeByRequest($categoryRequest);
         return $this->json('Category successfully created', [
             'category' => CategoryResource::make($category),
         ]);
@@ -31,9 +31,9 @@ class CategoryController extends Controller
             'category' => CategoryResource::make($category),
         ]);
     }
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $categoryRequest, Category $category)
     {
-        $category = CategoryRepository::updateByRequest($request, $category);
+        $category = CategoryRepository::updateByRequest($categoryRequest, $category);
         return $this->json('Category successfully updated', [
             'category' => CategoryResource::make($category),
         ]);

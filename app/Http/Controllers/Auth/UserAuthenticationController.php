@@ -11,19 +11,14 @@ use Illuminate\Http\Request;
 
 class UserAuthenticationController extends Controller
 {
-    public function __construct(
-        private UserRepository $userRepository,
-    ) {
-    }
-
     public function login(LoginRequest $request)
     {
-        $user = $this->userRepository->firstByEmail($request->email);
+        $user = UserRepository::firstByEmail($request->email);
 
         if ($user && Hash::check($request->password, $user->password)) {
             return $this->json('Signed in successfully', [
                 'user' => new UserResource($user),
-                'access' => $this->userRepository->getAccessToken($user),
+                'access' => UserRepository::getAccessToken($user),
             ]);
         }
         return $this->json('Credential is invalid!', [], 422);

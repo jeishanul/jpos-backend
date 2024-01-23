@@ -6,20 +6,18 @@ use App\Models\User;
 
 class UserRepository extends Repository
 {
-    public function model()
+    public static $path = "/users";
+    public static function model()
     {
         return User::class;
     }
-
-    public function firstByEmail($email)
+    public static function firstByEmail($email)
     {
-        return $this->query()->where('email', $email)->first();
+        return self::query()->where('email', $email)->first();
     }
-
-    public function getAccessToken(User $user)
+    public static function getAccessToken(User $user)
     {
         $token = $user->createToken('user token');
-
         return [
             'auth_type' => 'Bearer',
             'token' => $token->accessToken,

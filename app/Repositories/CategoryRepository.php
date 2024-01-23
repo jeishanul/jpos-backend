@@ -13,12 +13,12 @@ class CategoryRepository extends Repository
     {
         return Category::class;
     }
-    public static function storeByRequest(CategoryRequest $request): Category
+    public static function storeByRequest(CategoryRequest $categoryRequest): Category
     {
         $thumbnailId = null;
-        if ($request->hasFile('image')) {
+        if ($categoryRequest->hasFile('image')) {
             $thumbnail = MediaRepository::storeByRequest(
-                $request->image,
+                $categoryRequest->image,
                 self::$path,
                 'Image'
             );
@@ -28,17 +28,17 @@ class CategoryRepository extends Repository
         return self::create([
             'created_by' => auth()->id(),
             'shop_id' => self::mainShop()->id,
-            'name' => $request->name,
-            'parent_id' => $request->parent_id,
+            'name' => $categoryRequest->name,
+            'parent_id' => $categoryRequest->parent_id,
             'thumbnail_id' => $thumbnailId,
         ]);
     }
-    public static function updateByRequest(CategoryRequest $request, Category $category): Category
+    public static function updateByRequest(CategoryRequest $categoryRequest, Category $category): Category
     {
         $thumbnailId = null;
-        if ($request->hasFile('image')) {
+        if ($categoryRequest->hasFile('image')) {
             $thumbnail = MediaRepository::updateOrCreateByRequest(
-                $request->image,
+                $categoryRequest->image,
                 self::$path,
                 'Image',
                 $category->thumbnail
@@ -47,8 +47,8 @@ class CategoryRepository extends Repository
         }
 
         self::update($category, [
-            'name' => $request->name,
-            'parent_id' => $request->parent_id,
+            'name' => $categoryRequest->name,
+            'parent_id' => $categoryRequest->parent_id,
             'thumbnail_id' => $thumbnailId ? $thumbnailId : $category->thumbnail_id,
         ]);
         return $category;
