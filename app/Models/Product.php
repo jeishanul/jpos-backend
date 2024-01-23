@@ -24,9 +24,24 @@ class Product extends Model
         'barcode_symbology' => BarcodeSymbology::class,
         'tax_method' => TaxMethods::class,
     ];
-
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function tax()
+    {
+        return $this->belongsTo(Tax::class);
+    }
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
     public function media()
     {
-    	return $this->belongsTo(Media::class,'media_id');
+        return $this->belongsTo(Media::class);
     }
 }
