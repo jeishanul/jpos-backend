@@ -2,8 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Enums\DiscountType;
+use App\Enums\BarcodeSymbology;
+use App\Enums\ProductType;
 use App\Enums\Status;
+use App\Enums\TaxMethods;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Media;
@@ -32,17 +34,19 @@ class ProductFactory extends Factory
             'shop_id' => 1,
             'name' => $this->faker->name,
             'code' => random_int(1000000000, 9999999999),
+            'type' => $this->faker->randomElement(ProductType::cases()),
             'model' => $this->faker->name,
+            'barcode_symbology' => $this->faker->randomElement(BarcodeSymbology::cases()),
             'category_id' => $this->faker->randomElement($categoryIds),
             'tax_id' => $this->faker->randomElement($taxIds),
+            'tax_method' => $this->faker->randomElement(TaxMethods::cases()),
             'brand_id' => $this->faker->randomElement($brandIds),
             'unit_id' => $this->faker->randomElement($unitIds),
             'price' => $this->faker->randomFloat(),
-            'alert_qty' => $this->faker->randomDigit(),
-            'discount' => $this->faker->randomDigit(),
-            'discount_type' => $this->faker->randomElement(DiscountType::cases()),
-            'status' => $this->faker->randomElement(Status::cases()),
+            'cost' => $this->faker->randomFloat(),
+            'alert_quantity' => $this->faker->randomDigit(),
             'media_id' => Media::factory()->create(),
+            'qty' => 0,
             'status' => $this->faker->randomElement(Status::cases())
         ];
     }

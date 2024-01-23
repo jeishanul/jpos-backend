@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('shop_category_id')->nullable()->constrained((new ShopCategory())->getTable());
+            $table->foreignId('user_id')->constrained((new User())->getTable());
+            $table->foreignId('shop_category_id')->constrained((new ShopCategory())->getTable());
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

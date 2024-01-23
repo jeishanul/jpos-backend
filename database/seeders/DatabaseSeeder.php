@@ -25,13 +25,14 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
         ]);
 
-        $this->installStorageLink();
+        $this->installLink();
     }
 
-    private function installStorageLink()
+    private function installLink()
     {
-        $this->command->warn('Installing storage link');
+        $this->command->warn('Installing passport client');
+        Artisan::call('passport:install');
         Artisan::call('storage:link');
-        $this->command->info('Storage link installed');
+        $this->command->info('Passport client installed');
     }
 }

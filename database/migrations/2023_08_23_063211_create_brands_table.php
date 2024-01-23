@@ -16,10 +16,10 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
+            $table->foreignId('user_id')->constrained((new User())->getTable());
+            $table->foreignId('shop_id')->constrained((new Shop())->getTable());
             $table->string('name');
-            $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
+            $table->foreignId('media_id')->constrained((new Media())->getTable());
             $table->string('status');
             $table->timestamps();
             $table->softDeletes();

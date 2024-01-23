@@ -14,11 +14,12 @@ return new class extends Migration
     {
         Schema::create('shop_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
+            $table->foreignId('user_id')->constrained((new User())->getTable());
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

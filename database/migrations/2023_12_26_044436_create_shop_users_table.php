@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained((new User())->getTable());
             $table->foreignId('shop_id')->constrained((new Shop())->getTable());
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

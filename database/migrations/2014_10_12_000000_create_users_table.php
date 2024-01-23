@@ -22,8 +22,7 @@ return new class extends Migration
             $table->timestamp('phone_number_verified_at')->nullable();
             $table->string('role');
             $table->string('status');
-            $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
-            $table->string('slug');
+            $table->foreignId('media_id')->constrained((new Media())->getTable());
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -20,21 +20,24 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
+            $table->foreignId('user_id')->constrained((new User())->getTable());
+            $table->foreignId('shop_id')->constrained((new Shop())->getTable());
             $table->string('name');
             $table->string('code');
+            $table->string('type');
             $table->string('model')->nullable();
+            $table->string('barcode_symbology');
             $table->foreignId('category_id')->constrained((new Category())->getTable());
-            $table->foreignId('tax_id')->nullable()->constrained((new Tax())->getTable());
-            $table->foreignId('brand_id')->nullable()->constrained((new Brand())->getTable());
-            $table->foreignId('unit_id')->nullable()->constrained((new Unit())->getTable());
-            $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
+            $table->foreignId('tax_id')->constrained((new Tax())->getTable());
+            $table->foreignId('brand_id')->constrained((new Brand())->getTable());
+            $table->foreignId('unit_id')->constrained((new Unit())->getTable());
+            $table->foreignId('media_id')->constrained((new Media())->getTable());
             $table->double('price');
-            $table->integer('alert_qty');
-            $table->double('discount')->nullable();
-            $table->string('discount_type')->nullable();
+            $table->double('cost');
+            $table->bigInteger('qty');
+            $table->integer('alert_quantity');
             $table->string('status');
+            $table->string('tax_method');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\Role;
 use App\Enums\Status;
+use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,6 +30,7 @@ class UserFactory extends Factory
             'role' => $this->faker->randomElement(Role::cases()),
             'phone_number' => $this->faker->phoneNumber(),
             'phone_number_verified_at' => null,
+            'media_id' => Media::factory()->create(),
             'status' => Status::ACTIVE->value
         ];
     }
