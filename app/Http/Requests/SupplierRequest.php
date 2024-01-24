@@ -35,9 +35,9 @@ class SupplierRequest extends FormRequest
             'zip_code' => 'nullable|string|max:255',
             'image' => 'nullable|mimes:jpg,jpeg,png,gif|max:2048',
             'company_name' => 'nullable|string|max:255',
-            'vat_number' => 'nullable|string|max:255',
             'busniss_phone_number' => 'nullable|string|max:255',
-            'busniss_email' => 'nullable|string|max:255',
+            'busniss_email' => 'nullable|email|max:255',
+            'vat_number' => 'nullable|string|max:255',
             'status' => ['required', new Enum(Status::class)]
         ];
     }
