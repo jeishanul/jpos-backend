@@ -6,7 +6,7 @@ use App\Models\User;
 
 class UserRepository extends Repository
 {
-    public static $path = "/users";
+    public static $path = "/user";
     public static function model()
     {
         return User::class;
