@@ -14,6 +14,20 @@ class PurchaseResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'supplier' => UserResource::make($this->supplier),
+            'media' => $this->media->file,
+            'date' => $this->date,
+            'reference_no' => $this->reference_no,
+            'order_discount' => $this->order_discount,
+            'shipping_cost' => $this->shipping_cost,
+            'grand_total' => $this->grand_total,
+            'paid_amount' => $this->paid_amount,
+            'status' => $this->status,
+            'payment_status' => $this->payment_status,
+            'payment_method' => $this->payment_method,
+            'note' => $this->note,
+        ];
     }
 }

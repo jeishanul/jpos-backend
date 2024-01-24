@@ -22,4 +22,16 @@ class Purchase extends Model
         'payment_status' => PaymentStatus::class,
         'payment_method' => PaymentMethod::class,
     ];
+    public function tax()
+    {
+        return $this->belongsTo(Tax::class);
+    }
+    public function supplier()
+    {
+        return $this->belongsTo(User::class,'supplier_id');
+    }
+    public function media()
+    {
+        return $this->belongsTo(Media::class);
+    }
 }

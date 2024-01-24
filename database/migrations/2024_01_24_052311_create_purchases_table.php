@@ -2,7 +2,6 @@
 
 use App\Models\Media;
 use App\Models\Shop;
-use App\Models\Tax;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,7 +18,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('supplier_id')->nullable()->constrained((new User())->getTable());
+            $table->foreignId('supplier_id')->constrained((new User())->getTable());
+            $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
+            $table->date('date')->nullable();
             $table->string('reference_no');
             $table->double('order_discount')->default(0);
             $table->double('shipping_cost')->default(0);
@@ -28,10 +29,8 @@ return new class extends Migration
             $table->string('status');
             $table->string('payment_status');
             $table->string('payment_method');
-            $table->foreignId('tax_id')->nullable()->constrained((new Tax())->getTable());
-            $table->foreignId('document_id')->nullable()->constrained((new Media())->getTable());
             $table->longText('note')->nullable();
-            $table->date('date')->nullable();
+            
             $table->timestamps();
             $table->softDeletes();
         });

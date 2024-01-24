@@ -24,13 +24,13 @@ class CategoryRequest extends FormRequest
     public function rules(): array
     {
         $method = request()->isMethod('put');
-        $isImageRequired = 'required';
+        $isRequired = 'required';
         if ($method) {
-            $isImageRequired = 'nullable';
+            $isRequired = 'nullable';
         }
         return [
             'name' => 'required|string|max:255',
-            'image' => $isImageRequired . '|mimes:jpg,jpeg,png,gif|max:2048',
+            'image' => $isRequired . '|mimes:jpg,jpeg,png,gif|max:2048',
             'parent_id' => 'nullable|integer',
             'status' => ['required', new Enum(Status::class)]
         ];

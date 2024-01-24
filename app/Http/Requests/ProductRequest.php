@@ -27,9 +27,9 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         $method = request()->isMethod('put');
-        $isImageRequired = 'required';
+        $isRequired = 'required';
         if ($method) {
-            $isImageRequired = 'nullable';
+            $isRequired = 'nullable';
         }
         return [
             'name' => 'required|string|max:255',
@@ -45,7 +45,7 @@ class ProductRequest extends FormRequest
             'price' => 'required|numeric',
             'cost' => 'required|numeric',
             'alert_quantity' => 'required|integer',
-            'image' => $isImageRequired . '|mimes:jpg,jpeg,png,gif',
+            'image' => $isRequired . '|mimes:jpg,jpeg,png,gif',
             'status' => ['required', new Enum(Status::class)]
         ];
     }
