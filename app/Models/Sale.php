@@ -4,12 +4,11 @@ namespace App\Models;
 
 use App\Enums\PaymentMethod;
 use App\Enums\PaymentStatus;
-use App\Enums\PurchaseStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Purchase extends Model
+class Sale extends Model
 {
     use HasFactory, SoftDeletes;
 
@@ -18,20 +17,19 @@ class Purchase extends Model
     protected $dates = ['deleted_at'];
 
     protected $casts = [
-        'status' => PurchaseStatus::class,
         'payment_status' => PaymentStatus::class,
         'payment_method' => PaymentMethod::class,
     ];
-    public function supplier()
+    public function customer()
     {
-        return $this->belongsTo(User::class, 'supplier_id');
+        return $this->belongsTo(User::class, 'customer_id');
     }
     public function media()
     {
         return $this->belongsTo(Media::class);
     }
-    public function purchaseProducts()
+    public function saleProducts()
     {
-        return $this->hasMany(PurchaseProduct::class);
+        return $this->hasMany(SaleProduct::class);
     }
 }

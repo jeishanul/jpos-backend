@@ -5,6 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -69,5 +70,12 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{purchase}', 'details');
         Route::post('store', 'store');
         Route::put('update/{purchase}', 'update');
+    });
+    // Sale Route
+    Route::controller(SaleController::class)->prefix('sale')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{sale}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{sale}', 'update');
     });
 });

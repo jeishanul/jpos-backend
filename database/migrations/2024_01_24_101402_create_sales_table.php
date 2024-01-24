@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Media;
 use App\Models\Shop;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -14,19 +13,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shop_id')->constrained((new Shop())->getTable());
             $table->foreignId('user_id')->constrained((new User())->getTable());
-            $table->foreignId('supplier_id')->constrained((new User())->getTable());
-            $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
+            $table->foreignId('customer_id')->nullable()->constrained((new User())->getTable());
             $table->date('date')->nullable();
             $table->string('reference_no');
             $table->double('order_discount')->nullable();
             $table->double('shipping_cost')->nullable();
             $table->double('grand_total');
             $table->double('paid_amount')->nullable();
-            $table->string('status');
             $table->string('payment_status');
             $table->string('payment_method');
             $table->longText('note')->nullable();
@@ -40,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('purchases');
+        Schema::dropIfExists('sales');
     }
 };

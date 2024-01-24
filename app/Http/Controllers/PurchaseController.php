@@ -49,7 +49,7 @@ class PurchaseController extends Controller
     public function details(Purchase $purchase)
     {
         return $this->json('Purchase Details', [
-            'purchase' => new PurchaseResource($purchase),
+            'purchase' => PurchaseResource::make($purchase),
         ]);
     }
     public function update(PurchaseRequest $purchaseRequest, Purchase $purchase)
