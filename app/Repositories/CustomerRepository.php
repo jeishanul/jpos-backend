@@ -40,7 +40,25 @@ class CustomerRepository extends Repository
     }
     public static function updateByRequest(CustomerRequest $customerRequest, User $customer): User
     {
-        self::update($customer, []);
+        $mediaId = null;
+        if ($customerRequest->hasFile('image')) {
+            $media = MediaRepository::updateOrCreateByRequest(
+                $customerRequest->image,
+                self::$path,
+                'Image',
+                $customer->media
+            );
+            $mediaId = $media->id;
+        }
+
+        self::update($customer, [
+            "name" => $customerRequest->name,
+            "email" => $customerRequest->email,
+            "password" => Hash::make($customerRequest->password),
+            "phone_number" => $customerRequest->phone_number,
+            "status" => $customerRequest->status,
+            'media_id' => $mediaId ? $mediaId : $customer->media_id,
+        ]);
         return $customer;
     }
 }

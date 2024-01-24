@@ -39,7 +39,25 @@ class SupplierRepository extends Repository
     }
     public static function updateByRequest(SupplierRequest $supplierRequest, User $supplier): User
     {
-        self::update($supplier, []);
+        $mediaId = null;
+        if ($supplierRequest->hasFile('image')) {
+            $media = MediaRepository::updateOrCreateByRequest(
+                $supplierRequest->image,
+                self::$path,
+                'Image',
+                $supplier->media
+            );
+            $mediaId = $media->id;
+        }
+
+        self::update($supplier, [
+            "name" => $supplierRequest->name,
+            "email" => $supplierRequest->email,
+            "password" => Hash::make($supplierRequest->password),
+            "phone_number" => $supplierRequest->phone_number,
+            "status" => $supplierRequest->status,
+            'media_id' => $mediaId ? $mediaId : $supplier->media_id,
+        ]);
         return $supplier;
     }
 }
