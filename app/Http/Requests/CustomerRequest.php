@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class CustomerRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class CustomerRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,17 @@ class CustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone_number' => 'required|string|unique:users',
+            'password' => 'required|string|min:8',
+            'country' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'zip_code' => 'nullable|string|max:255',
+            'image' => 'nullable|mimes:jpg,jpeg,png,gif|max:2048',
+            'status' => ['required', new Enum(Status::class)]
         ];
     }
 }

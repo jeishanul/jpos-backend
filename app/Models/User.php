@@ -63,4 +63,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Shop::class, 'shop_users');
     }
+    public function address()
+    {
+        return $this->hasOne(Address::class);
+    }
+    public function companyInfo()
+    {
+        return $this->hasOne(CompanyInfo::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Enums\Role;
 use App\Http\Requests\CustomerRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,7 @@ class CustomerRepository extends Repository
             "password" => Hash::make($customerRequest->password),
             "phone_number" => $customerRequest->phone_number,
             "phone_number_verified_at" => now(),
-            "role" => 'Customer',
+            "role" => Role::CUSTOMER->value,
             "status" => $customerRequest->status,
             "media_id" => $mediaId
         ]);

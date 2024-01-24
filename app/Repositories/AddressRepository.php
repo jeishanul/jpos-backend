@@ -10,13 +10,26 @@ class AddressRepository extends Repository
     {
         return Address::class;
     }
-    public static function storeByRequest($request): Address
+    public static function storeByRequest($request, $user): Address
     {
-        return self::create([]);
+        return self::create([
+            'user_id' => $user->id,
+            'country' => $request->country,
+            'state' => $request->state,
+            'city' => $request->city,
+            'address' => $request->address,
+            'zip_code' => $request->zip_code
+        ]);
     }
-    public static function updateByRequest($request, Address $address): Address
+    public static function updateByRequest($request, $user): Address
     {
-        self::update($address, []);
-        return $address;
+        self::update($user->address, [
+            'country' => $request->country,
+            'state' => $request->state,
+            'city' => $request->city,
+            'address' => $request->address,
+            'zip_code' => $request->zip_code
+        ]);
+        return $user->address;
     }
 }

@@ -18,11 +18,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('email')->nullable();
-            $table->string('country')->nullable();
-            $table->string('state')->nullable();
-            $table->string('city')->nullable();
-            $table->string('address')->nullable();
-            $table->string('zip_code')->nullable();
+            $table->string('vat_number')->nullable();
             $table->timestamps();
         });
     }

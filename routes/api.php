@@ -3,9 +3,11 @@
 use App\Http\Controllers\Auth\UserAuthenticationController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Support\Facades\Route;
@@ -77,5 +79,19 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{sale}', 'details');
         Route::post('store', 'store');
         Route::put('update/{sale}', 'update');
+    });
+    // Customer Route
+    Route::controller(CustomerController::class)->prefix('customer')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{customer}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{customer}', 'update');
+    });
+    // Customer Route
+    Route::controller(SupplierController::class)->prefix('supplier')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{supplier}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{supplier}', 'update');
     });
 });
