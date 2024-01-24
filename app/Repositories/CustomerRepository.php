@@ -54,7 +54,6 @@ class CustomerRepository extends Repository
         self::update($customer, [
             "name" => $customerRequest->name,
             "email" => $customerRequest->email,
-            "password" => Hash::make($customerRequest->password),
             "phone_number" => $customerRequest->phone_number,
             "status" => $customerRequest->status,
             'media_id' => $mediaId ? $mediaId : $customer->media_id,

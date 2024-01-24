@@ -31,14 +31,7 @@ class User extends Authenticatable
         'status' => Status::class,
         'role' => Role::class,
     ];
-
-
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -65,7 +58,7 @@ class User extends Authenticatable
     }
     public function address()
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class, 'user_id');
     }
     public function companyInfo()
     {

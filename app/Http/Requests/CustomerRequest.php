@@ -23,11 +23,17 @@ class CustomerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $method = request()->isMethod('put');
+        $isRequired = 'required';
+        if ($method) {
+            $isRequired = 'nullable';
+        }
+
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone_number' => 'required|string|unique:users',
-            'password' => 'required|string|min:8',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $this->customer?->id,
+            'phone_number' => 'required|string|unique:users,phone_number,' . $this->customer?->id,
+            'password' => $isRequired . '|string|min:8',
             'country' => 'nullable|string|max:255',
             'state' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',

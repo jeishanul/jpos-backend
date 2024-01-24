@@ -30,6 +30,7 @@ class AddressRepository extends Repository
             'address' => $request->address,
             'zip_code' => $request->zip_code
         ]);
+        
         return $user->address;
     }
 }

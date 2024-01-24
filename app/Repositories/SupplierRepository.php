@@ -53,7 +53,6 @@ class SupplierRepository extends Repository
         self::update($supplier, [
             "name" => $supplierRequest->name,
             "email" => $supplierRequest->email,
-            "password" => Hash::make($supplierRequest->password),
             "phone_number" => $supplierRequest->phone_number,
             "status" => $supplierRequest->status,
             'media_id' => $mediaId ? $mediaId : $supplier->media_id,

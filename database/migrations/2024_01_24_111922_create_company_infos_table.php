@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('vat_number')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
