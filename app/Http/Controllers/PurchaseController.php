@@ -55,6 +55,27 @@ class PurchaseController extends Controller
     public function update(PurchaseRequest $purchaseRequest, Purchase $purchase)
     {
         $purchase = PurchaseRepository::updateByRequest($purchaseRequest, $purchase);
+        $purchase->purchaseProducts()->delete();
+        $subTotal = 0;
+        $paymentStatus = PaymentStatus::PAID->value;
+
+        foreach ($purchaseRequest->products as $purchaseProduct) {
+            PurchaseProductRepository::storeByRequest($purchase->id, $purchaseProduct['id'], $purchaseProduct['qty']);
+            $product = ProductRepository::find($purchaseProduct['id']);
+            $tax = $product->price * $product->tax->rate / 100;
+            $subTotal += ($product->price + $tax) * $purchaseProduct['qty'];
+        }
+
+        $grandTotal = $subTotal - $purchaseRequest->order_discount + $purchaseRequest->shipping_cost;
+        if ($grandTotal > $purchaseRequest->paid_amount) {
+            $paymentStatus = PaymentStatus::DUE->value;
+        }
+
+        $purchase->update([
+            'grand_total' => $grandTotal,
+            'payment_status' => $paymentStatus
+        ]);
+
         return $this->json('Purchase successfully created', [
             'purchase' => PurchaseResource::make($purchase),
         ]);

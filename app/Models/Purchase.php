@@ -28,10 +28,14 @@ class Purchase extends Model
     }
     public function supplier()
     {
-        return $this->belongsTo(User::class,'supplier_id');
+        return $this->belongsTo(User::class, 'supplier_id');
     }
     public function media()
     {
         return $this->belongsTo(Media::class);
+    }
+    public function purchaseProducts()
+    {
+        return $this->hasMany(PurchaseProduct::class);
     }
 }

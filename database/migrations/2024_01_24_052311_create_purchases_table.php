@@ -22,10 +22,10 @@ return new class extends Migration
             $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
             $table->date('date')->nullable();
             $table->string('reference_no');
-            $table->double('order_discount')->default(0);
-            $table->double('shipping_cost')->default(0);
+            $table->double('order_discount')->nullable();
+            $table->double('shipping_cost')->nullable();
             $table->double('grand_total');
-            $table->double('paid_amount')->default(0);
+            $table->double('paid_amount')->nullable();
             $table->string('status');
             $table->string('payment_status');
             $table->string('payment_method');

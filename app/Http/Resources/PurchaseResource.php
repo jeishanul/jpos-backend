@@ -17,7 +17,7 @@ class PurchaseResource extends JsonResource
         return [
             'id' => $this->id,
             'supplier' => UserResource::make($this->supplier),
-            'media' => $this->media->file,
+            'media' => $this->media->file ?? null,
             'date' => $this->date,
             'reference_no' => $this->reference_no,
             'order_discount' => $this->order_discount,
@@ -28,6 +28,7 @@ class PurchaseResource extends JsonResource
             'payment_status' => $this->payment_status,
             'payment_method' => $this->payment_method,
             'note' => $this->note,
+            'purchase_products' => PurchaseProductResource::collection($this->purchaseProducts),
         ];
     }
 }
