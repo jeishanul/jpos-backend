@@ -12,7 +12,7 @@ class BrandController extends Controller
 {
     public function index()
     {
-        $brands = BrandRepository::query()->orderByDesc('id')->get();
+        $brands = BrandRepository::getAll();
         return $this->json('Brand List', [
             'brands' => BrandResource::collection($brands),
         ]);
