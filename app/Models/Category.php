@@ -9,15 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
-    use HasFactory, SoftDeletes;
-
-    protected $guarded = ['id'];
-
-    protected $dates = ['deleted_at'];
-
-    protected $casts = [
-        'status' => Status::class,
-    ];
 
     public function media()
     {
