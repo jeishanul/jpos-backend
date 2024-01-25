@@ -13,11 +13,21 @@ class CurrencyRepository extends Repository
     }
     public static function storeByRequest(CurrencyRequest $currencyRequest): Currency
     {
-        return self::create([]);
+        return self::create([
+            'user_id' => auth()->id(),
+            'shop_id' => self::shop()->id,
+            'name' => $currencyRequest->name,
+            'symbol' => $currencyRequest->symbol,
+            'code' => $currencyRequest->code
+        ]);
     }
     public static function updateByRequest(CurrencyRequest $currencyRequest, Currency $currency): Currency
     {
-        self::update($currency, []);
+        self::update($currency, [
+            'name' => $currencyRequest->name,
+            'symbol' => $currencyRequest->symbol,
+            'code' => $currencyRequest->code
+        ]);
 
         return $currency;
     }

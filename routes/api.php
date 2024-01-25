@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\UserAuthenticationController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
@@ -93,5 +94,12 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{supplier}', 'details');
         Route::post('store', 'store');
         Route::put('update/{supplier}', 'update');
+    });
+    // Currency Route
+    Route::controller(CurrencyController::class)->prefix('currency')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{currency}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{currency}', 'update');
     });
 });
