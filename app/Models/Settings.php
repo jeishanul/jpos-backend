@@ -19,4 +19,20 @@ class Settings extends Model
         'date_format' => DateFormat::class,
         'date_separator' => DateSeparator::class,
     ];
+    public function logo()
+    {
+        return $this->belongsTo(Media::class, 'logo');
+    }
+    public function smallLogo()
+    {
+        return $this->belongsTo(Media::class, 'small_logo');
+    }
+    public function favicon()
+    {
+        return $this->belongsTo(Media::class, 'favicon');
+    }
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
+    }
 }

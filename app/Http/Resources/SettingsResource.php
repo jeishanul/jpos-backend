@@ -14,6 +14,19 @@ class SettingsResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'system_name' => $this->system_name,
+            'logo' => $this->logo->file ?? null,
+            'small_logo' => $this->smallLogo->file ?? null,
+            'favicon' => $this->favicon->file ?? null,
+            'currency' => CurrencyResource::make($this->currency),
+            'currency_position' => $this->currency_position,
+            'date_format' => $this->date_format,
+            'date_separator' => $this->date_separator,
+            'developed_by' => $this->developed_by,
+            'phone_number' => $this->phone_number,
+            'email' => $this->email,
+            'address' => $this->address,
+        ];
     }
 }

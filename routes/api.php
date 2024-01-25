@@ -8,6 +8,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
@@ -101,5 +102,9 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{currency}', 'details');
         Route::post('store', 'store');
         Route::put('update/{currency}', 'update');
+    });
+    // Settings Route
+    Route::controller(SettingsController::class)->prefix('settings')->group(function () {
+        Route::get('/', 'settings');
     });
 });
