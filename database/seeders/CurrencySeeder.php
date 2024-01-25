@@ -40,8 +40,7 @@ class CurrencySeeder extends Seeder
                 'status' => Status::ACTIVE->value
             ]
         ];
-        foreach ($currencys as $currency) {
-            Currency::create($currency);
-        }
+        
+        Currency::insert($currencys);
     }
 }

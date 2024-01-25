@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
-            $table->foreignId('created_by')->nullable()->constrained((new User())->getTable());
+            $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
             $table->foreignId('logo')->nullable()->constrained((new Media())->getTable());
             $table->foreignId('favicon')->nullable()->constrained((new Media())->getTable());
             $table->foreignId('small_logo')->nullable()->constrained((new Media())->getTable());
