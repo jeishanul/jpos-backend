@@ -18,7 +18,7 @@ class TaxResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'rate' => $this->rate,
-            'status' => $this->status,
+            'status' => $this->status
         ];
     }
 }

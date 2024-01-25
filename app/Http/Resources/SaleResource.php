@@ -26,7 +26,7 @@ class SaleResource extends JsonResource
             'payment_status' => $this->payment_status,
             'payment_method' => $this->payment_method,
             'note' => $this->note,
-            'sale_products' => SaleProductResource::collection($this->saleProducts),
+            'sale_products' => SaleProductResource::collection($this->saleProducts)
         ];
     }
 }

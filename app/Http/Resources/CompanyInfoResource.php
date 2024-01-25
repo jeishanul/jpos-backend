@@ -19,7 +19,7 @@ class CompanyInfoResource extends JsonResource
             'company_name' => $this->name,
             'business_phone_number' => $this->phone_number,
             'business_email' => $this->email,
-            'vat_number' => $this->vat_number,
+            'vat_number' => $this->vat_number
         ];
     }
 }

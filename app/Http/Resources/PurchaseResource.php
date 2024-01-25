@@ -28,7 +28,7 @@ class PurchaseResource extends JsonResource
             'payment_status' => $this->payment_status,
             'payment_method' => $this->payment_method,
             'note' => $this->note,
-            'purchase_products' => PurchaseProductResource::collection($this->purchaseProducts),
+            'purchase_products' => PurchaseProductResource::collection($this->purchaseProducts)
         ];
     }
 }

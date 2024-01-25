@@ -19,7 +19,7 @@ class CategoryResource extends JsonResource
             'name' => $this->name,
             'parentCategory' => $this->parentCategory->name ?? 'N/A',
             'media' => $this->media->file,
-            'status' => $this->status,
+            'status' => $this->status
         ];
     }
 }

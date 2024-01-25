@@ -17,7 +17,7 @@ class PurchaseProductResource extends JsonResource
         return [
             'id' => $this->id,
             'product' => ProductResource::make($this->product),
-            'qty' => $this->qty,
+            'qty' => $this->qty
         ];
     }
 }

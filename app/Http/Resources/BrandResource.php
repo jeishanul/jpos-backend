@@ -18,7 +18,7 @@ class BrandResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'media' => $this->media->file,
-            'status' => $this->status,
+            'status' => $this->status
         ];
     }
 }

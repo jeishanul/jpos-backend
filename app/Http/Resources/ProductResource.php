@@ -31,7 +31,7 @@ class ProductResource extends JsonResource
             'cost' => $this->cost,
             'qty' => $this->qty,
             'alert_quantity' => $this->alert_quantity,
-            'status' => $this->status,
+            'status' => $this->status
         ];
     }
 }
