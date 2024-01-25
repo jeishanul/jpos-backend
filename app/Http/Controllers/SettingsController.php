@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
-    public function settings(SettingsRequest $settingsRequest)
+    public function update(SettingsRequest $settingsRequest)
     {
         $settings = SettingsRepository::find(1);
         $settings = SettingsRepository::updateByRequest($settingsRequest, $settings);

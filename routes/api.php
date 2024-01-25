@@ -105,6 +105,6 @@ Route::middleware('auth:api')->group(function () {
     });
     // Settings Route
     Route::controller(SettingsController::class)->prefix('settings')->group(function () {
-        Route::get('/', 'settings');
+        Route::put('/update', 'update');
     });
 });

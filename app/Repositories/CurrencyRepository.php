@@ -18,7 +18,8 @@ class CurrencyRepository extends Repository
             'shop_id' => self::shop()->id,
             'name' => $currencyRequest->name,
             'symbol' => $currencyRequest->symbol,
-            'code' => $currencyRequest->code
+            'code' => $currencyRequest->code,
+            'status' => $currencyRequest->status
         ]);
     }
     public static function updateByRequest(CurrencyRequest $currencyRequest, Currency $currency): Currency
@@ -26,7 +27,8 @@ class CurrencyRepository extends Repository
         self::update($currency, [
             'name' => $currencyRequest->name,
             'symbol' => $currencyRequest->symbol,
-            'code' => $currencyRequest->code
+            'code' => $currencyRequest->code,
+            'status' => $currencyRequest->status
         ]);
 
         return $currency;

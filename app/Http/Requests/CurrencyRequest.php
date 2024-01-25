@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Status;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class CurrencyRequest extends FormRequest
 {
@@ -25,6 +27,7 @@ class CurrencyRequest extends FormRequest
             'name' => 'required|string|max:255',
             'code' => 'required|string|max:255',
             'symbol' => 'required|string|max:255',
+            'status' => ['required', new Enum(Status::class)]
         ];
     }
 }
