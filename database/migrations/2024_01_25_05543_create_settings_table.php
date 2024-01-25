@@ -19,9 +19,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('shop_id')->nullable()->constrained((new Shop())->getTable());
             $table->foreignId('user_id')->nullable()->constrained((new User())->getTable());
-            $table->foreignId('logo')->nullable()->constrained((new Media())->getTable());
-            $table->foreignId('favicon')->nullable()->constrained((new Media())->getTable());
-            $table->foreignId('small_logo')->nullable()->constrained((new Media())->getTable());
+            $table->foreignId('logo_id')->nullable()->constrained((new Media())->getTable());
+            $table->foreignId('favicon_id')->nullable()->constrained((new Media())->getTable());
+            $table->foreignId('small_logo_id')->nullable()->constrained((new Media())->getTable());
             $table->foreignId('currency_id')->constrained((new Currency())->getTable());
             $table->string('system_name');
             $table->string('currency_position');

@@ -14,7 +14,7 @@ class SettingsRepository extends Repository
     }
     public static function updateByRequest(SettingsRequest $settingsRequest, Settings $settings): Settings
     {
-        $logoId = null;
+        $logoId = $settings->logo_id;
         if ($settingsRequest->hasFile('logo')) {
             $logo = (new MediaRepository())->updateOrCreateByRequest(
                 $settingsRequest->logo,
@@ -24,7 +24,7 @@ class SettingsRepository extends Repository
             $logoId = $logo->id;
         }
 
-        $smallLogoId = null;
+        $smallLogoId = $settings->small_logo_id;
         if ($settingsRequest->hasFile('small_logo')) {
             $smallLogo = (new MediaRepository())->updateOrCreateByRequest(
                 $settingsRequest->small_logo,
@@ -34,7 +34,7 @@ class SettingsRepository extends Repository
             $smallLogoId = $smallLogo->id;
         }
 
-        $faviconId = null;
+        $faviconId = $settings->favicon_id;
         if ($settingsRequest->hasFile('favicon')) {
             $favicon = (new MediaRepository())->updateOrCreateByRequest(
                 $settingsRequest->favicon,
@@ -46,9 +46,9 @@ class SettingsRepository extends Repository
 
         self::update($settings, [
             'system_name' => $settingsRequest->system_name,
-            'logo' => $logoId,
-            'favicon' => $faviconId,
-            'small_logo' => $smallLogoId,
+            'logo_id' => $logoId,
+            'favicon_id' => $faviconId,
+            'small_logo_id' => $smallLogoId,
             'developed_by' => $settingsRequest->developed_by,
             'currency_position' => $settingsRequest->currency_position,
             'date_format' => $settingsRequest->date_format,

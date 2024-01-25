@@ -29,10 +29,21 @@ class UserRepository extends Repository
     }
     public static function profileUpdate(ProfileUpdateRequest $profileUpdateRequest, User $user): User
     {
+        $mediaId = $user->media_id;
+        if ($profileUpdateRequest->hasFile('image')) {
+            $media = (new MediaRepository())->updateOrCreateByRequest(
+                $profileUpdateRequest->image,
+                self::$path,
+                'Image'
+            );
+            $mediaId = $media->id;
+        }
+
         self::update($user, [
             'name' => $profileUpdateRequest->name,
             'email' => $profileUpdateRequest->email,
-            'phone_number' => $profileUpdateRequest->phone_number
+            'phone_number' => $profileUpdateRequest->phone_number,
+            'media_id' => $mediaId
         ]);
 
         return $user;

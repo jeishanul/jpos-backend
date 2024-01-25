@@ -21,15 +21,15 @@ class Settings extends Model
     ];
     public function logo()
     {
-        return $this->belongsTo(Media::class, 'logo');
+        return $this->belongsTo(Media::class, 'logo_id');
     }
     public function smallLogo()
     {
-        return $this->belongsTo(Media::class, 'small_logo');
+        return $this->belongsTo(Media::class, 'small_logo_id');
     }
     public function favicon()
     {
-        return $this->belongsTo(Media::class, 'favicon');
+        return $this->belongsTo(Media::class, 'favicon_id');
     }
     public function currency()
     {

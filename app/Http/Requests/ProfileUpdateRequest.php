@@ -25,6 +25,7 @@ class ProfileUpdateRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . auth()->id(),
             'phone_number' => 'required|string|unique:users,phone_number,' . auth()->id(),
+            'image' => 'nullable|mimes:jpg,jpeg,png,gif|max:2048'
         ];
     }
 }
