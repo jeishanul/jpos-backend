@@ -12,6 +12,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -104,7 +105,7 @@ Route::middleware('auth:api')->group(function () {
         Route::put('update/{currency}', 'update');
     });
     // Settings Route
-    Route::controller(SettingsController::class)->prefix('settings')->group(function () {
-        Route::put('/update', 'update');
-    });
+    Route::put('/settings/update', [SettingsController::class, 'update']);
+    // Profile Update Route
+    Route::put('/profile-update', [UserController::class, 'profileUpdate']);
 });

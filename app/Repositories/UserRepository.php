@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
 
 class UserRepository extends Repository
@@ -23,5 +24,15 @@ class UserRepository extends Repository
             'token' => $token->accessToken,
             'expires_at' => $token->token->expires_at->format('Y-m-d H:i:s'),
         ];
+    }
+    public static function profileUpdate(ProfileUpdateRequest $profileUpdateRequest, User $user): User
+    {
+        self::update($user, [
+            'name' => $profileUpdateRequest->name,
+            'email' => $profileUpdateRequest->email,
+            'phone_number' => $profileUpdateRequest->phone_number
+        ]);
+
+        return $user;
     }
 }
