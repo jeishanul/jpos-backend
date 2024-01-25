@@ -5,6 +5,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SaleController;
@@ -33,6 +34,8 @@ Route::controller(UserAuthenticationController::class)->group(function () {
 Route::middleware('auth:api')->group(function () {
     // Logout
     Route::get('logout', [UserAuthenticationController::class, 'logout']);
+    // Settings Route
+    Route::get('dashboard', [DashboardController::class, 'index']);
     // Category Route
     Route::controller(CategoryController::class)->prefix('category')->group(function () {
         Route::get('list', 'index');
@@ -105,7 +108,7 @@ Route::middleware('auth:api')->group(function () {
         Route::put('update/{currency}', 'update');
     });
     // Settings Route
-    Route::put('/settings/update', [SettingsController::class, 'update']);
+    Route::put('settings/update', [SettingsController::class, 'update']);
     // Profile Update Route
     Route::controller(UserController::class)->group(function () {
         Route::put('profile-update', 'profileUpdate');
