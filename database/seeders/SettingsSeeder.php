@@ -24,8 +24,8 @@ class SettingsSeeder extends Seeder
             'currency_position' => CurrencyPosition::PREFIX->value,
             'date_format' => DateFormat::DMY->value,
             'date_separator' => DateSeparator::SLASH->value,
-            'phone_number' => '123456789',
-            'email' => 'JPOS',
+            'phone_number' => '017123456789',
+            'email' => 'jpos@gmail.com',
             'address' => 'JPOS',
             'currency_id' => 1
         ]);
