@@ -32,7 +32,7 @@ Route::controller(UserAuthenticationController::class)->group(function () {
 });
 Route::middleware('auth:api')->group(function () {
     // Logout
-    Route::get('/logout', [UserAuthenticationController::class, 'logout']);
+    Route::get('logout', [UserAuthenticationController::class, 'logout']);
     // Category Route
     Route::controller(CategoryController::class)->prefix('category')->group(function () {
         Route::get('list', 'index');
@@ -107,5 +107,8 @@ Route::middleware('auth:api')->group(function () {
     // Settings Route
     Route::put('/settings/update', [SettingsController::class, 'update']);
     // Profile Update Route
-    Route::put('/profile-update', [UserController::class, 'profileUpdate']);
+    Route::controller(UserController::class)->group(function () {
+        Route::put('profile-update', 'profileUpdate');
+        Route::put('password-update', 'passwordUpdate');
+    });
 });

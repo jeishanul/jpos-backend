@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Repositories\UserRepository;
@@ -16,5 +17,11 @@ class UserController extends Controller
         return $this->json('Profile update successfully updated', [
             'user' => UserResource::make($user),
         ]);
+    }
+    public function passwordUpdate(PasswordUpdateRequest $passwordUpdateRequest)
+    {
+        $user = auth()->user();
+        UserRepository::passwordUpdate($passwordUpdateRequest, $user);
+        return $this->json('Password successfully updated');
     }
 }

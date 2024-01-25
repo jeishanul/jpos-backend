@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\PasswordUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends Repository
 {
@@ -33,6 +35,13 @@ class UserRepository extends Repository
             'phone_number' => $profileUpdateRequest->phone_number
         ]);
 
+        return $user;
+    }
+    public static function passwordUpdate(PasswordUpdateRequest $passwordUpdateRequest, User $user): User
+    {
+        self::update($user, [
+            'password' => Hash::make($passwordUpdateRequest->password)
+        ]);
         return $user;
     }
 }
