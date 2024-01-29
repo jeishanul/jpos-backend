@@ -15,6 +15,10 @@ class Category extends Model
     {
         return $this->belongsTo(Media::class);
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function parentCategory()
     {
         return $this->belongsTo(Category::class, 'parent_id');

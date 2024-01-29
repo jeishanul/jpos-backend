@@ -13,14 +13,14 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = CategoryRepository::query()->whereNull('parent_id')->get();
+        $categories = $this->shop()->categories()->whereNull('parent_id')->get();
         return $this->json('Category List', [
             'categories' => CategoryResource::collection($categories),
         ]);
     }
     public function subcategory()
     {
-        $subcategories = CategoryRepository::query()->whereNotNull('parent_id')->get();
+        $subcategories = $this->shop()->categories()->whereNotNull('parent_id')->get();
         return $this->json('subcategory List', [
             'subcategories' => CategoryResource::collection($subcategories),
         ]);

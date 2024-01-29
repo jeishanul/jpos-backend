@@ -18,8 +18,10 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'parentCategory' => $this->parentCategory->name ?? 'N/A',
-            'media' => $this->media->file,
-            'status' => $this->status
+            'image' => $this->media->file,
+            'status' => $this->status,
+            'created_by' => $this->user?->name,
+            'created_at' => $this->created_at
         ];
     }
 }

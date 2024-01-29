@@ -22,7 +22,7 @@ class Controller extends BaseController
         }
         return response()->json($content, $statusCode, $headers, $options);
     }
-    protected function mainShop()
+    protected function shop()
     {
         $user = auth()->user();
         $mainShop = $user->shopUser->first();

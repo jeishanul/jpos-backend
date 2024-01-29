@@ -31,6 +31,8 @@ use Illuminate\Support\Facades\Route;
 Route::controller(UserAuthenticationController::class)->group(function () {
     Route::post('login', 'login');
 });
+// Settings Route
+Route::get('settings', [SettingsController::class, 'index']);
 Route::middleware('auth:api')->group(function () {
     // Logout
     Route::get('logout', [UserAuthenticationController::class, 'logout']);
