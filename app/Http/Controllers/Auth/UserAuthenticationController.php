@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Repositories\UserRepository;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserAuthenticationController extends Controller
 {
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $loginRequest)
     {
-        $user = UserRepository::firstByEmail($request->email);
-
-        if ($user && Hash::check($request->password, $user->password)) {
+        $credentials = $loginRequest->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
             return $this->json('Signed in successfully', [
                 'user' => new UserResource($user),
                 'access' => UserRepository::getAccessToken($user),

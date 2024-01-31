@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Http\Requests\PasswordUpdateRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends Repository
 {
@@ -18,16 +17,6 @@ class UserRepository extends Repository
     public static function model()
     {
         return User::class;
-    }
-    /**
-     * A description of the entire PHP function.
-     *
-     * @param datatype $email description
-     * @return Model|null
-     */
-    public static function firstByEmail($email)
-    {
-        return self::query()->where('email', $email)->first();
     }
     /**
      * Retrieves the access token for the specified user.
@@ -82,7 +71,7 @@ class UserRepository extends Repository
     public static function passwordUpdate(PasswordUpdateRequest $passwordUpdateRequest, User $user): User
     {
         self::update($user, [
-            'password' => Hash::make($passwordUpdateRequest->password)
+            'password' => bcrypt($passwordUpdateRequest->password)
         ]);
         return $user;
     }

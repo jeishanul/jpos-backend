@@ -6,7 +6,6 @@ use App\Enums\Role;
 use App\Enums\Status;
 use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -25,7 +24,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => Hash::make('123456'), // password
+            'password' => bcrypt('123456'), // password
             'remember_token' => Str::random(10),
             'role' => $this->faker->randomElement(Role::cases()),
             'phone_number' => $this->faker->phoneNumber(),

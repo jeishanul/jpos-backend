@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Http\Requests\SupplierRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class SupplierRepository extends Repository
 {
@@ -42,7 +41,7 @@ class SupplierRepository extends Repository
             "name" => $supplierRequest->name,
             "email" => $supplierRequest->email,
             "email_verified_at" => now(),
-            "password" => Hash::make($supplierRequest->password),
+            "password" => bcrypt($supplierRequest->password),
             "phone_number" => $supplierRequest->phone_number,
             "phone_number_verified_at" => now(),
             "role" => 'Customer',
