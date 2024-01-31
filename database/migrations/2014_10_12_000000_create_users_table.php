@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('role');
             $table->string('status');
             $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
+            $table->foreignId('user_id')->nullable();
+            $table->foreignId('shop_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

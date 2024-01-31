@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,6 +30,10 @@ class Shop extends Model
     public function currencies()
     {
         return $this->hasMany(Currency::class);
+    }
+    public function customers()
+    {
+        return $this->hasMany(User::class)->where('role', Role::CUSTOMER->value);
     }
     public function shopUser()
     {

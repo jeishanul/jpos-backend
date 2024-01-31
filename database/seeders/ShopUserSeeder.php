@@ -16,7 +16,6 @@ class ShopUserSeeder extends Seeder
     {
         $user = User::find(2);
         $shop = Shop::find(1);
-        // dd($user, $shop);
         $shop->shopUser()->attach($user, ['shop_id' => 1]);
     }
 }

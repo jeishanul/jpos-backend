@@ -60,4 +60,14 @@ class CustomerRepository extends Repository
         ]);
         return $customer;
     }
+    public static function search($search)
+    {
+        $customers = self::shop()->customers()->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%")
+                ->orWhere('email', 'Like', "%{$search}%")
+                ->orWhere('phone_number', 'Like', "%{$search}%");
+        });
+
+        return $customers;
+    }
 }

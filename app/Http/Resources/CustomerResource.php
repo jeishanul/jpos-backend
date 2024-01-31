@@ -21,7 +21,9 @@ class CustomerResource extends JsonResource
             'phone_number' => $this->phone_number,
             'role' => $this->role,
             'address' => AddressResource::make($this->address),
-            'image' => $this->media?->file
+            'image' => $this->media?->file,
+            'created_by' => $this->user->name,
+            'created_at' => dateFormat($this->created_at)
         ];
     }
 }

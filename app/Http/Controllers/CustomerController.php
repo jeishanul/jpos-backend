@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\Role;
 use App\Http\Requests\CustomerRequest;
 use App\Http\Resources\CustomerResource;
 use App\Models\User;
@@ -14,8 +13,20 @@ class CustomerController extends Controller
 {
     public function index()
     {
-        $customers = CustomerRepository::query()->where('role', Role::CUSTOMER->value)->get();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchCustomers = CustomerRepository::search($search);
+        $total = $searchCustomers->count();
+        $customers = $searchCustomers->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Customer List', [
+            'total' => $total,
             'customers' => CustomerResource::collection($customers),
         ]);
     }
@@ -41,7 +52,7 @@ class CustomerController extends Controller
             'customer' => CustomerResource::make($customer),
         ]);
     }
-    public function delete(User $customer)
+    public function destroy(User $customer)
     {
         $customer->delete();
         return $this->json('Customer successfully deleted');

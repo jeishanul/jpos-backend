@@ -39,7 +39,9 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Demo Customer',
             'email' => 'customer@demo.com',
-            'role' => 'Customer'
+            'role' => 'Customer',
+            'user_id' => 2,
+            'shop_id' => 1
         ]);
     }
     private function supplier()
@@ -47,7 +49,9 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'name' => 'Demo Supplier',
             'email' => 'supplier@demo.com',
-            'role' => 'Supplier'
+            'role' => 'Supplier',
+            'user_id' => 2,
+            'shop_id' => 1
         ]);
     }
 }
