@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained((new User())->getTable());
             $table->foreignId('supplier_id')->constrained((new User())->getTable());
             $table->foreignId('media_id')->nullable()->constrained((new Media())->getTable());
-            $table->date('date')->nullable();
+            $table->timestamp('date')->nullable();
             $table->string('reference_no');
             $table->double('order_discount')->nullable();
             $table->double('shipping_cost')->nullable();

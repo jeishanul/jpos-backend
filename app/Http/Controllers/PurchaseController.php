@@ -15,8 +15,20 @@ class PurchaseController extends Controller
 {
     public function index()
     {
-        $purchases = PurchaseRepository::getAll();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchPurchases = PurchaseRepository::search($search);
+        $total = $searchPurchases->count();
+        $purchases = $searchPurchases->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Purchase List', [
+            'total' => $total,
             'purchases' => PurchaseResource::collection($purchases),
         ]);
     }
@@ -80,7 +92,7 @@ class PurchaseController extends Controller
             'purchase' => PurchaseResource::make($purchase),
         ]);
     }
-    public function delete(Purchase $purchase)
+    public function destroy(Purchase $purchase)
     {
         $purchase->delete();
         return $this->json('Purchase successfully deleted');

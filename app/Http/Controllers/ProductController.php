@@ -49,7 +49,7 @@ class ProductController extends Controller
             'product' => ProductResource::make($product),
         ]);
     }
-    public function delete(Product $product)
+    public function destroy(Product $product)
     {
         $product->delete();
         return $this->json('Product successfully deleted');

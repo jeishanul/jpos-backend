@@ -16,9 +16,12 @@ class PurchaseResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'supplier' => UserResource::make($this->supplier),
-            'media' => $this->media->file ?? null,
-            'date' => $this->date,
+            'supplier' => [
+                'id' => $this->supplier->id,
+                'name' => $this->supplier->name,
+            ],
+            'media' => $this->media?->file,
+            'date' => dateFormat($this->date),
             'reference_no' => $this->reference_no,
             'order_discount' => $this->order_discount,
             'shipping_cost' => $this->shipping_cost,
@@ -28,7 +31,8 @@ class PurchaseResource extends JsonResource
             'payment_status' => $this->payment_status,
             'payment_method' => $this->payment_method,
             'note' => $this->note,
-            'purchase_products' => PurchaseProductResource::collection($this->purchaseProducts)
+            'purchase_products' => PurchaseProductResource::collection($this->purchaseProducts),
+            'created_by' => $this->user->name
         ];
     }
 }

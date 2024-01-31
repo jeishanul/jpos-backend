@@ -75,6 +75,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{product}', 'details');
         Route::post('store', 'store');
         Route::put('update/{product}', 'update');
+        Route::delete('destroy/{product}', 'destroy');
     });
     // Purchase Route
     Route::controller(PurchaseController::class)->prefix('purchase')->group(function () {
@@ -82,6 +83,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{purchase}', 'details');
         Route::post('store', 'store');
         Route::put('update/{purchase}', 'update');
+        Route::delete('destroy/{purchase}', 'destroy');
     });
     // Sale Route
     Route::controller(SaleController::class)->prefix('sale')->group(function () {

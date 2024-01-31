@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('shop_id')->constrained((new Shop())->getTable());
             $table->foreignId('user_id')->constrained((new User())->getTable());
             $table->foreignId('customer_id')->nullable()->constrained((new User())->getTable());
-            $table->date('date')->nullable();
+            $table->timestamp('date')->nullable();
             $table->string('reference_no');
             $table->double('order_discount')->nullable();
             $table->double('shipping_cost')->nullable();

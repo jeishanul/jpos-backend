@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Enums\PaymentStatus;
 use App\Http\Requests\PurchaseRequest;
 use App\Models\Purchase;
+use Carbon\Carbon;
 
 class PurchaseRepository extends Repository
 {
@@ -30,7 +31,7 @@ class PurchaseRepository extends Repository
             'shop_id' => self::shop()->id,
             'supplier_id' => $purchaseRequest->supplier_id,
             'media_id' => $mediaId,
-            'date' => $purchaseRequest->date ?? now(),
+            'date' => Carbon::parse($purchaseRequest->date) ?? now(),
             'reference_no' => 'pr-' . date("Ymd") . '-' . date("his"),
             'order_discount' => $purchaseRequest->order_discount,
             'shipping_cost' => $purchaseRequest->shipping_cost,
@@ -58,7 +59,7 @@ class PurchaseRepository extends Repository
         self::update($purchase, [
             'supplier_id' => $purchaseRequest->supplier_id,
             'media_id' => $mediaId,
-            'date' => $purchaseRequest->date ?? now(),
+            'date' => Carbon::parse($purchaseRequest->date) ?? now(),
             'reference_no' => 'pr-' . date("Ymd") . '-' . date("his"),
             'order_discount' => $purchaseRequest->order_discount,
             'shipping_cost' => $purchaseRequest->shipping_cost,
@@ -70,5 +71,13 @@ class PurchaseRepository extends Repository
             'note' => $purchaseRequest->note,
         ]);
         return $purchase;
+    }
+    public static function search($search)
+    {
+        $purchases = self::shop()->purchases()->when($search, function ($query) use ($search) {
+            $query->where('reference_no', 'Like', "%{$search}%");
+        });
+
+        return $purchases;
     }
 }
