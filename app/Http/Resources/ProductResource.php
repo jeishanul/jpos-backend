@@ -26,7 +26,8 @@ class ProductResource extends JsonResource
                 'name' => $this->category->name
             ],
             'tax' => [
-                'rate' => $this->tax->rate,
+                'name' => $this->tax?->name,
+                'rate' => $this->tax?->rate,
             ],
             'tax_method' => $this->tax_method,
             'brand' => [
@@ -39,8 +40,8 @@ class ProductResource extends JsonResource
                 'code' => $this->unit->code
             ],
             'media' => $this->media->file,
-            'price' => $this->price,
-            'cost' => $this->cost,
+            'price' => numberFormat($this->price),
+            'cost' => numberFormat($this->cost),
             'qty' => $this->qty,
             'alert_quantity' => $this->alert_quantity,
             'status' => $this->status,
