@@ -12,8 +12,20 @@ class TaxController extends Controller
 {
     public function index()
     {
-        $taxs = TaxRepository::getAll();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchTaxs = TaxRepository::search($search);
+        $total = $searchTaxs->count();
+        $taxs = $searchTaxs->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Tax List', [
+            'total' => $total,
             'taxs' => TaxResource::collection($taxs),
         ]);
     }
@@ -37,7 +49,7 @@ class TaxController extends Controller
             'tax' => TaxResource::make($tax),
         ]);
     }
-    public function delete(Tax $tax)
+    public function destroy(Tax $tax)
     {
         $tax->delete();
         return $this->json('Tax successfully deleted');

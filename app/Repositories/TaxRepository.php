@@ -31,4 +31,13 @@ class TaxRepository extends Repository
 
         return $tax;
     }
+    public static function search($search)
+    {
+        $taxs = self::shop()->taxs()->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%")
+                ->orWhere('rate', 'Like', "%{$search}%");
+        });
+
+        return $taxs;
+    }
 }
