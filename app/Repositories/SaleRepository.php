@@ -9,10 +9,22 @@ use Carbon\Carbon;
 
 class SaleRepository extends Repository
 {
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return Sale::class
+     */
     public static function model()
     {
         return Sale::class;
     }
+    /**
+     * Store sale by request.
+     *
+     * @param SaleRequest $saleRequest description
+     * @throws Some_Exception_Class description of exception
+     * @return Sale
+     */
     public static function storeByRequest(SaleRequest $saleRequest): Sale
     {
         return self::create([
@@ -30,6 +42,13 @@ class SaleRepository extends Repository
             'note' => $saleRequest->note,
         ]);
     }
+    /**
+     * Update a sale using the provided request data.
+     *
+     * @param SaleRequest $saleRequest The sale request data
+     * @param Sale $sale The sale to be updated
+     * @return Sale The updated sale
+     */
     public static function updateByRequest(SaleRequest $saleRequest, Sale $sale): Sale
     {
         self::update($sale, [
@@ -47,6 +66,12 @@ class SaleRepository extends Repository
 
         return $sale;
     }
+    /**
+     * Perform a search for sales based on the given search parameter.
+     *
+     * @param mixed $search The search parameter to filter sales by reference number.
+     * @return Collection The collection of sales matching the search parameter.
+     */
     public static function search($search)
     {
         $sales = self::shop()->sales()->when($search, function ($query) use ($search) {

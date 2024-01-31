@@ -8,10 +8,22 @@ use App\Models\Settings;
 class SettingsRepository extends Repository
 {
     private static $path = '/settings';
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return Settings::class
+     */
     public static function model()
     {
         return Settings::class;
     }
+    /**
+     * Update settings by request.
+     *
+     * @param SettingsRequest $settingsRequest Description
+     * @param Settings $settings Description
+     * @return Settings
+     */
     public static function updateByRequest(SettingsRequest $settingsRequest, Settings $settings): Settings
     {
         $logoId = $settings->logo_id;

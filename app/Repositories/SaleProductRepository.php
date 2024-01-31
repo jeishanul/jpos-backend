@@ -11,6 +11,15 @@ class SaleProductRepository extends Repository
     {
         return SaleProduct::class;
     }
+    /**
+     * A description of the entire PHP function.
+     *
+     * @param datatype $saleId description
+     * @param datatype $productId description
+     * @param datatype $productQty description
+     * @throws Some_Exception_Class description of exception
+     * @return SaleProduct
+     */
     public static function storeByRequest($saleId, $productId, $productQty): SaleProduct
     {
         return self::create([

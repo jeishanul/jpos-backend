@@ -10,10 +10,22 @@ use Carbon\Carbon;
 class PurchaseRepository extends Repository
 {
     public static $path = "/purchase";
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return Purchase::class
+     */
     public static function model()
     {
         return Purchase::class;
     }
+    /**
+     * Store a new purchase using the given purchase request.
+     *
+     * @param PurchaseRequest $purchaseRequest The purchase request to store
+     * @throws Some_Exception_Class description of exception
+     * @return Purchase The newly created purchase
+     */
     public static function storeByRequest(PurchaseRequest $purchaseRequest): Purchase
     {
         $mediaId = null;
@@ -43,6 +55,13 @@ class PurchaseRepository extends Repository
             'note' => $purchaseRequest->note,
         ]);
     }
+    /**
+     * Update a purchase based on the purchase request.
+     *
+     * @param PurchaseRequest $purchaseRequest The purchase request data
+     * @param Purchase $purchase The purchase to be updated
+     * @return Purchase The updated purchase
+     */
     public static function updateByRequest(PurchaseRequest $purchaseRequest, Purchase $purchase): Purchase
     {
         $mediaId = null;
@@ -72,6 +91,12 @@ class PurchaseRepository extends Repository
         ]);
         return $purchase;
     }
+    /**
+     * Search for purchases based on the provided search criteria.
+     *
+     * @param mixed $search The search criteria
+     * @return mixed Returns the found purchases
+     */
     public static function search($search)
     {
         $purchases = self::shop()->purchases()->when($search, function ($query) use ($search) {

@@ -7,10 +7,22 @@ use App\Models\Tax;
 
 class TaxRepository extends Repository
 {
+    /**
+     * Store a new tax record based on the given TaxRequest.
+     *
+     * @param TaxRequest $taxRequest The tax request data
+     * @return Tax The newly created tax record
+     */
     public static function model()
     {
         return Tax::class;
     }
+    /**
+     * Store a new tax record based on the given TaxRequest.
+     *
+     * @param TaxRequest $taxRequest The tax request data
+     * @return Tax The newly created tax record
+     */
     public static function storeByRequest(TaxRequest $taxRequest): Tax
     {
         return self::create([
@@ -21,6 +33,13 @@ class TaxRepository extends Repository
             'status' => $taxRequest->status
         ]);
     }
+    /**
+     * Update a Tax entity based on a TaxRequest object.
+     *
+     * @param TaxRequest $taxRequest The tax request object
+     * @param Tax $tax The tax entity to be updated
+     * @return Tax The updated tax entity
+     */
     public static function updateByRequest(TaxRequest $taxRequest, Tax $tax): Tax
     {
         self::update($tax, [
@@ -31,6 +50,12 @@ class TaxRepository extends Repository
 
         return $tax;
     }
+    /**
+     * Search for taxs based on the given search parameter.
+     *
+     * @param mixed $search The search parameter
+     * @return mixed The resulting taxs
+     */
     public static function search($search)
     {
         $taxs = self::shop()->taxs()->when($search, function ($query) use ($search) {

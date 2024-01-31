@@ -8,10 +8,21 @@ use App\Models\Product;
 class ProductRepository extends Repository
 {
     private static $path = '/product';
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return Product::class
+     */
     public static function model()
     {
         return Product::class;
     }
+    /**
+     * Store a product using the given request.
+     *
+     * @param ProductRequest $productRequest The product request data
+     * @return Product The created product
+     */
     public static function storeByRequest(ProductRequest $productRequest): Product
     {
         $mediaId = null;
@@ -45,6 +56,13 @@ class ProductRepository extends Repository
             'status' => $productRequest->status
         ]);
     }
+    /**
+     * Update a product using the provided product request and product.
+     *
+     * @param ProductRequest $productRequest The product request data
+     * @param Product $product The product to be updated
+     * @return Product The updated product
+     */
     public static function updateByRequest(ProductRequest $productRequest, Product $product): Product
     {
         $mediaId = null;
@@ -78,6 +96,12 @@ class ProductRepository extends Repository
 
         return $product;
     }
+    /**
+     * search function to search for products by name or code.
+     *
+     * @param string $search the keyword to search for
+     * @return array the array of products matching the search
+     */
     public static function search($search)
     {
         $products = self::shop()->products()->when($search, function ($query) use ($search) {

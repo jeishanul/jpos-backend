@@ -7,10 +7,21 @@ use App\Models\Unit;
 
 class UnitRepository extends Repository
 {
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return datatype
+     */
     public static function model()
     {
         return Unit::class;
     }
+    /**
+     * Store a new unit based on the provided request.
+     *
+     * @param UnitRequest $unitRequest The unit request data
+     * @return Unit The newly created unit
+     */
     public static function storeByRequest(UnitRequest $unitRequest): Unit
     {
         return self::create([
@@ -21,7 +32,13 @@ class UnitRepository extends Repository
             'status' => $unitRequest->status
         ]);
     }
-
+    /**
+     * Update a unit using the provided unit request and unit object.
+     *
+     * @param UnitRequest $unitRequest The unit request object
+     * @param Unit $unit The unit object to be updated
+     * @return Unit The updated unit object
+     */
     public static function updateByRequest(UnitRequest $unitRequest, Unit $unit): Unit
     {
         self::update($unit, [
@@ -32,6 +49,12 @@ class UnitRepository extends Repository
 
         return $unit;
     }
+    /**
+     * Search for units based on the given search criteria.
+     *
+     * @param mixed $search The search criteria to filter units.
+     * @return mixed The units matching the search criteria.
+     */
     public static function search($search)
     {
         $units = self::shop()->units()->when($search, function ($query) use ($search) {

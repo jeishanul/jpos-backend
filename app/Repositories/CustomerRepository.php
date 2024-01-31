@@ -10,10 +10,21 @@ use Illuminate\Support\Facades\Hash;
 class CustomerRepository extends Repository
 {
     public static $path = "/customer";
+    /**
+     * Retrieve the model for the PHP function.
+     *
+     * @return string
+     */
     public static function model()
     {
         return User::class;
     }
+    /**
+     * Store a new user based on the provided request data.
+     *
+     * @param CustomerRequest $customerRequest The request data for creating a new user
+     * @return User The newly created user
+     */
     public static function storeByRequest(CustomerRequest $customerRequest): User
     {
         $mediaId = null;
@@ -38,6 +49,13 @@ class CustomerRepository extends Repository
             "media_id" => $mediaId
         ]);
     }
+    /**
+     * Update user by request.
+     *
+     * @param CustomerRequest $customerRequest description
+     * @param User $customer description
+     * @return User
+     */
     public static function updateByRequest(CustomerRequest $customerRequest, User $customer): User
     {
         $mediaId = null;
@@ -60,6 +78,12 @@ class CustomerRepository extends Repository
         ]);
         return $customer;
     }
+    /**
+     * search function.
+     *
+     * @param mixed $search
+     * @return mixed
+     */
     public static function search($search)
     {
         $customers = self::shop()->customers()->when($search, function ($query) use ($search) {

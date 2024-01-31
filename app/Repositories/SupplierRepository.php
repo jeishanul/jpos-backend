@@ -9,10 +9,23 @@ use Illuminate\Support\Facades\Hash;
 class SupplierRepository extends Repository
 {
     public static $path = "/supplier";
+    /**
+     * A description of the entire PHP function.
+     *
+     * @param datatype $paramname description
+     * @throws Some_Exception_Class description of exception
+     * @return Some_Return_Value
+     */
     public static function model()
     {
         return User::class;
     }
+    /**
+     * Store a new user based on the given SupplierRequest.
+     *
+     * @param SupplierRequest $supplierRequest The request containing user information
+     * @return User The newly created user
+     */
     public static function storeByRequest(SupplierRequest $supplierRequest): User
     {
         $mediaId = null;
@@ -37,6 +50,13 @@ class SupplierRepository extends Repository
             "media_id" => $mediaId
         ]);
     }
+    /**
+     * Update user by supplier request.
+     *
+     * @param SupplierRequest $supplierRequest The supplier request instance
+     * @param User $supplier The supplier user instance
+     * @return User The updated user instance
+     */
     public static function updateByRequest(SupplierRequest $supplierRequest, User $supplier): User
     {
         $mediaId = null;
@@ -59,6 +79,12 @@ class SupplierRepository extends Repository
         ]);
         return $supplier;
     }
+    /**
+     * Search for suppliers based on the given search criteria.
+     *
+     * @param mixed $search The search criteria
+     * @return mixed The list of suppliers matching the search criteria
+     */
     public static function search($search)
     {
         $suppliers = self::shop()->suppliers()->when($search, function ($query) use ($search) {

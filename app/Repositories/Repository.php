@@ -9,17 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 abstract class Repository
 {
     abstract public static function model();
-
+    /**
+     * Query the model to start building a new query.
+     *
+     * @return Builder
+     */
     public static function query(): Builder
     {
         return static::model()::query();
     }
-
+    /**
+     * Get all the items from the collection.
+     *
+     * @return Collection
+     */
     public static function getAll(): Collection
     {
         return static::model()::latest()->get();
     }
-
     /**
      * @return Builder|Model|object|null
      */
@@ -27,7 +34,6 @@ abstract class Repository
     {
         return static::query()->first();
     }
-
     /**
      * @return Builder|Builder[]|Collection|Model|null|mixed
      */
@@ -35,7 +41,6 @@ abstract class Repository
     {
         return static::query()->find($primaryKey);
     }
-
     /**
      * @return Builder|Builder[]|Collection|Model|null|mixed
      */
@@ -43,12 +48,16 @@ abstract class Repository
     {
         return static::query()->findOrFail($primaryKey);
     }
-
+    /**
+     * Delete a record by primary key.
+     *
+     * @param datatype $primaryKey description
+     * @return bool
+     */
     public static function delete($primaryKey): bool
     {
         return static::model()::destroy($primaryKey);
     }
-
     /**
      * @return Builder|Model|mixed
      */
@@ -56,7 +65,6 @@ abstract class Repository
     {
         return static::query()->create($data);
     }
-
     /**
      * @return bool
      */
@@ -64,7 +72,11 @@ abstract class Repository
     {
         return $model->update($data);
     }
-
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return mixed
+     */
     protected static function shop()
     {
         $user = auth()->user();
