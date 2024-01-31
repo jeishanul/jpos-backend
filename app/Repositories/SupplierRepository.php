@@ -59,4 +59,14 @@ class SupplierRepository extends Repository
         ]);
         return $supplier;
     }
+    public static function search($search)
+    {
+        $suppliers = self::shop()->suppliers()->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%")
+                ->orWhere('email', 'Like', "%{$search}%")
+                ->orWhere('phone_number', 'Like', "%{$search}%");
+        });
+
+        return $suppliers;
+    }
 }

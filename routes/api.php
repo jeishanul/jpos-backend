@@ -107,6 +107,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{supplier}', 'details');
         Route::post('store', 'store');
         Route::put('update/{supplier}', 'update');
+        Route::delete('destroy/{supplier}', 'destroy');
     });
     // Currency Route
     Route::controller(CurrencyController::class)->prefix('currency')->group(function () {

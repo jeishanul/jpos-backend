@@ -15,8 +15,20 @@ class SupplierController extends Controller
 {
     public function index()
     {
-        $suppliers = SupplierRepository::query()->where('role', Role::SUPPLIER->value)->get();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchSuppliers = SupplierRepository::search($search);
+        $total = $searchSuppliers->count();
+        $suppliers = $searchSuppliers->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Supplier List', [
+            'total' => $total,
             'suppliers' => SupplierResource::collection($suppliers),
         ]);
     }
@@ -44,7 +56,7 @@ class SupplierController extends Controller
             'supplier' => SupplierResource::make($supplier),
         ]);
     }
-    public function delete(User $supplier)
+    public function destroy(User $supplier)
     {
         $supplier->delete();
         return $this->json('Supplier successfully deleted');

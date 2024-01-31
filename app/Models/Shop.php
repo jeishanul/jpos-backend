@@ -47,6 +47,10 @@ class Shop extends Model
     {
         return $this->hasMany(Sale::class);
     }
+    public function suppliers()
+    {
+        return $this->hasMany(User::class)->where('role', Role::SUPPLIER->value);
+    }
     public function shopUser()
     {
         return $this->belongsToMany(User::class, 'shop_users');
