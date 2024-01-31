@@ -78,4 +78,13 @@ class ProductRepository extends Repository
 
         return $product;
     }
+    public static function search($search)
+    {
+        $products = self::shop()->products()->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%")
+                ->orWhere('code', 'Like', "%{$search}%");
+        });
+
+        return $products;
+    }
 }

@@ -12,8 +12,20 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = ProductRepository::getAll();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchProducts = ProductRepository::search($search);
+        $total = $searchProducts->count();
+        $products = $searchProducts->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Product List', [
+            'total' => $total,
             'products' => ProductResource::collection($products),
         ]);
     }

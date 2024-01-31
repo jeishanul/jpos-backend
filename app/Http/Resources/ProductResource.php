@@ -21,17 +21,30 @@ class ProductResource extends JsonResource
             'type' => $this->type,
             'model' => $this->model,
             'barcode_symbology' => $this->barcode_symbology,
-            'category' => CategoryResource::make($this->category),
-            'tax' => TaxResource::make($this->tax),
+            'category' => [
+                'id' => $this->category->id,
+                'name' => $this->category->name
+            ],
+            'tax' => [
+                'rate' => $this->tax->rate,
+            ],
             'tax_method' => $this->tax_method,
-            'brand' => BrandResource::make($this->brand),
-            'unit' => UnitResource::make($this->unit),
+            'brand' => [
+                'id' => $this->brand->id,
+                'name' => $this->brand->name
+            ],
+            'unit' => [
+                'id' => $this->unit->id,
+                'name' => $this->unit->name,
+                'code' => $this->unit->code
+            ],
             'media' => $this->media->file,
             'price' => $this->price,
             'cost' => $this->cost,
             'qty' => $this->qty,
             'alert_quantity' => $this->alert_quantity,
-            'status' => $this->status
+            'status' => $this->status,
+            'created_by' => $this->user->name
         ];
     }
 }

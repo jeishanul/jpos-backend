@@ -35,6 +35,10 @@ class Shop extends Model
     {
         return $this->hasMany(User::class)->where('role', Role::CUSTOMER->value);
     }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     public function shopUser()
     {
         return $this->belongsToMany(User::class, 'shop_users');
