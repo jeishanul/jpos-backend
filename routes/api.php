@@ -36,8 +36,14 @@ Route::get('settings', [SettingsController::class, 'index']);
 Route::middleware('auth:api')->group(function () {
     // Logout
     Route::get('logout', [UserAuthenticationController::class, 'logout']);
-    // Settings Route
-    Route::get('dashboard', [DashboardController::class, 'index']);
+    // Brand Route
+    Route::controller(BrandController::class)->prefix('brand')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{brand}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{brand}', 'update');
+        Route::delete('destroy/{brand}', 'destroy');
+    });
     // Category Route
     Route::controller(CategoryController::class)->prefix('category')->group(function () {
         Route::get('list', 'index');
@@ -47,30 +53,24 @@ Route::middleware('auth:api')->group(function () {
         Route::put('update/{category}', 'update');
         Route::delete('destroy/{category}', 'destroy');
     });
-    // Brand Route
-    Route::controller(BrandController::class)->prefix('brand')->group(function () {
+    // Currency Route
+    Route::controller(CurrencyController::class)->prefix('currency')->group(function () {
         Route::get('list', 'index');
-        Route::get('details/{brand}', 'details');
+        Route::get('details/{currency}', 'details');
         Route::post('store', 'store');
-        Route::put('update/{brand}', 'update');
-        Route::delete('destroy/{brand}', 'destroy');
+        Route::put('update/{currency}', 'update');
+        Route::delete('destroy/{currency}', 'destroy');
     });
-    // Unit Route
-    Route::controller(UnitController::class)->prefix('unit')->group(function () {
+    // Customer Route
+    Route::controller(CustomerController::class)->prefix('customer')->group(function () {
         Route::get('list', 'index');
-        Route::get('details/{unit}', 'details');
+        Route::get('details/{customer}', 'details');
         Route::post('store', 'store');
-        Route::put('update/{unit}', 'update');
-        Route::delete('destroy/{unit}', 'destroy');
+        Route::put('update/{customer}', 'update');
+        Route::delete('destroy/{customer}', 'destroy');
     });
-    // Tax Route
-    Route::controller(TaxController::class)->prefix('tax')->group(function () {
-        Route::get('list', 'index');
-        Route::get('details/{tax}', 'details');
-        Route::post('store', 'store');
-        Route::put('update/{tax}', 'update');
-        Route::delete('destroy/{tax}', 'destroy');
-    });
+    // Dashboard Route
+    Route::get('dashboard', [DashboardController::class, 'index']);
     // Product Route
     Route::controller(ProductController::class)->prefix('product')->group(function () {
         Route::get('list', 'index');
@@ -95,15 +95,9 @@ Route::middleware('auth:api')->group(function () {
         Route::put('update/{sale}', 'update');
         Route::delete('destroy/{sale}', 'destroy');
     });
-    // Customer Route
-    Route::controller(CustomerController::class)->prefix('customer')->group(function () {
-        Route::get('list', 'index');
-        Route::get('details/{customer}', 'details');
-        Route::post('store', 'store');
-        Route::put('update/{customer}', 'update');
-        Route::delete('destroy/{customer}', 'destroy');
-    });
-    // Customer Route
+    // Settings Route
+    Route::put('settings/update', [SettingsController::class, 'update']);
+    // Supplier Route
     Route::controller(SupplierController::class)->prefix('supplier')->group(function () {
         Route::get('list', 'index');
         Route::get('details/{supplier}', 'details');
@@ -111,16 +105,22 @@ Route::middleware('auth:api')->group(function () {
         Route::put('update/{supplier}', 'update');
         Route::delete('destroy/{supplier}', 'destroy');
     });
-    // Currency Route
-    Route::controller(CurrencyController::class)->prefix('currency')->group(function () {
+    // Tax Route
+    Route::controller(TaxController::class)->prefix('tax')->group(function () {
         Route::get('list', 'index');
-        Route::get('details/{currency}', 'details');
+        Route::get('details/{tax}', 'details');
         Route::post('store', 'store');
-        Route::put('update/{currency}', 'update');
-        Route::delete('destroy/{currency}', 'destroy');
+        Route::put('update/{tax}', 'update');
+        Route::delete('destroy/{tax}', 'destroy');
     });
-    // Settings Route
-    Route::put('settings/update', [SettingsController::class, 'update']);
+    // Unit Route
+    Route::controller(UnitController::class)->prefix('unit')->group(function () {
+        Route::get('list', 'index');
+        Route::get('details/{unit}', 'details');
+        Route::post('store', 'store');
+        Route::put('update/{unit}', 'update');
+        Route::delete('destroy/{unit}', 'destroy');
+    });
     // Profile Update Route
     Route::controller(UserController::class)->group(function () {
         Route::put('profile-update', 'profileUpdate');
