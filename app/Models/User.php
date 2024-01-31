@@ -47,7 +47,10 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-
+    public function media()
+    {
+        return $this->belongsTo(Media::class);
+    }
     public function shops()
     {
         return $this->hasMany(Shop::class, 'user_id');

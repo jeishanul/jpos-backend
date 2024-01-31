@@ -21,7 +21,7 @@ class CategoryResource extends JsonResource
             'image' => $this->media->file,
             'status' => $this->status,
             'created_by' => $this->user?->name,
-            'created_at' => $this->created_at
+            'created_at' => dateFormat($this->created_at)
         ];
     }
 }

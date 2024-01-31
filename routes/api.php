@@ -45,6 +45,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{category}', 'details');
         Route::post('store', 'store');
         Route::put('update/{category}', 'update');
+        Route::delete('destroy/{category}', 'destroy');
     });
     // Brand Route
     Route::controller(BrandController::class)->prefix('brand')->group(function () {

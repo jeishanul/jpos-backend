@@ -13,15 +13,39 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = $this->shop()->categories()->whereNull('parent_id')->get();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchCategories = CategoryRepository::categorySearch($search);
+        $total = $searchCategories->count();
+        $categories = $searchCategories->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Category List', [
+            'total' => $total,
             'categories' => CategoryResource::collection($categories),
         ]);
     }
     public function subcategory()
     {
-        $subcategories = $this->shop()->categories()->whereNotNull('parent_id')->get();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchSubCategories = CategoryRepository::subcategorySearch($search);
+        $total = $searchSubCategories->count();
+        $subcategories = $searchSubCategories->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('subcategory List', [
+            'total' => $total,
             'subcategories' => CategoryResource::collection($subcategories),
         ]);
     }

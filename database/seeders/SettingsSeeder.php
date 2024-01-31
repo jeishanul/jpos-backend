@@ -24,6 +24,7 @@ class SettingsSeeder extends Seeder
             'currency_position' => CurrencyPosition::PREFIX->value,
             'date_format' => DateFormat::DMY->value,
             'date_separator' => DateSeparator::SLASH->value,
+            'timezone' => 'Asia/Dhaka',
             'phone_number' => '017123456789',
             'email' => 'jpos@gmail.com',
             'address' => 'JPOS',

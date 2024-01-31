@@ -53,7 +53,23 @@ class CategoryRepository extends Repository
             'status' => $categoryRequest->status,
             'media_id' => $mediaId ? $mediaId : $category->media_id,
         ]);
-        
+
         return $category;
+    }
+    public static function categorySearch($search)
+    {
+        $categories = self::shop()->categories()->whereNull('parent_id')->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%");
+        });
+
+        return $categories;
+    }
+    public static function subcategorySearch($search)
+    {
+        $subcategories = self::shop()->categories()->whereNotNull('parent_id')->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%");
+        });
+
+        return $subcategories;
     }
 }

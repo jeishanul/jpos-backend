@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('date_separator');
             $table->string('developed_by');
             $table->string('phone_number');
+            $table->string('timezone');
             $table->string('email');
             $table->string('address');
             $table->timestamps();

@@ -20,7 +20,8 @@ class CustomerResource extends JsonResource
             'email' => $this->email,
             'phone_number' => $this->phone_number,
             'role' => $this->role,
-            'address' => AddressResource::make($this->address)
+            'address' => AddressResource::make($this->address),
+            'image' => $this->media?->file
         ];
     }
 }

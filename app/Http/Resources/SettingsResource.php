@@ -23,6 +23,7 @@ class SettingsResource extends JsonResource
             'currency_position' => $this->currency_position,
             'date_format' => $this->date_format,
             'date_separator' => $this->date_separator,
+            'timezone' => $this->timezone,
             'developed_by' => $this->developed_by,
             'phone_number' => $this->phone_number,
             'email' => $this->email,
