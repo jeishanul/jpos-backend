@@ -55,6 +55,10 @@ class Shop extends Model
     {
         return $this->hasMany(Tax::class);
     }
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
     public function shopUser()
     {
         return $this->belongsToMany(User::class, 'shop_users');

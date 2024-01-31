@@ -12,8 +12,20 @@ class UnitController extends Controller
 {
     public function index()
     {
-        $units = UnitRepository::getAll();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchUnits = UnitRepository::search($search);
+        $total = $searchUnits->count();
+        $units = $searchUnits->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Unit List', [
+            'total' => $total,
             'units' => UnitResource::collection($units),
         ]);
     }
@@ -37,7 +49,7 @@ class UnitController extends Controller
             'unit' => UnitResource::make($unit),
         ]);
     }
-    public function delete(Unit $unit)
+    public function destroy(Unit $unit)
     {
         $unit->delete();
         return $this->json('Unit successfully deleted');

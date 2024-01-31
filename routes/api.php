@@ -61,6 +61,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{unit}', 'details');
         Route::post('store', 'store');
         Route::put('update/{unit}', 'update');
+        Route::delete('destroy/{unit}', 'destroy');
     });
     // Tax Route
     Route::controller(TaxController::class)->prefix('tax')->group(function () {

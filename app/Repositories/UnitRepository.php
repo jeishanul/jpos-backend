@@ -32,4 +32,13 @@ class UnitRepository extends Repository
 
         return $unit;
     }
+    public static function search($search)
+    {
+        $units = self::shop()->units()->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%")
+                ->orWhere('code', 'Like', "%{$search}%");
+        });
+
+        return $units;
+    }
 }

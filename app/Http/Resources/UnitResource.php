@@ -18,7 +18,9 @@ class UnitResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'code' => $this->code,
-            'status' => $this->status
+            'status' => $this->status,
+            'created_by' => $this->user->name,
+            'created_at' => dateFormat($this->created_at)
         ];
     }
 }
