@@ -53,4 +53,12 @@ class BrandRepository extends Repository
 
         return $brand;
     }
+    public static function search($search)
+    {
+        $brands = self::shop()->brands()->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%");
+        });
+
+        return $brands;
+    }
 }

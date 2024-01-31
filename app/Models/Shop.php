@@ -18,10 +18,13 @@ class Shop extends Model
     protected $casts = [
         'status' => Status::class,
     ];
-
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+    public function brands()
+    {
+        return $this->hasMany(Brand::class);
     }
     public function shopUser()
     {

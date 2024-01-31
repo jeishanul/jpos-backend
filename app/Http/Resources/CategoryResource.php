@@ -20,7 +20,7 @@ class CategoryResource extends JsonResource
             'parentCategory' => $this->parentCategory->name ?? 'N/A',
             'image' => $this->media->file,
             'status' => $this->status,
-            'created_by' => $this->user?->name,
+            'created_by' => $this->user->name,
             'created_at' => dateFormat($this->created_at)
         ];
     }

@@ -12,8 +12,20 @@ class BrandController extends Controller
 {
     public function index()
     {
-        $brands = BrandRepository::getAll();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchBrands = BrandRepository::search($search);
+        $total = $searchBrands->count();
+        $brands = $searchBrands->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Brand List', [
+            'total' => $total,
             'brands' => BrandResource::collection($brands),
         ]);
     }
