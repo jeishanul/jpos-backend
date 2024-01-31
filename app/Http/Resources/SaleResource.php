@@ -16,8 +16,11 @@ class SaleResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'customer' => UserResource::make($this->customer),
-            'date' => $this->date,
+            'customer' => [
+                'id' => $this->customer->id,
+                'name' => $this->customer->name,
+            ],
+            'date' => dateFormat($this->date),
             'reference_no' => $this->reference_no,
             'order_discount' => $this->order_discount,
             'shipping_cost' => $this->shipping_cost,
@@ -26,7 +29,8 @@ class SaleResource extends JsonResource
             'payment_status' => $this->payment_status,
             'payment_method' => $this->payment_method,
             'note' => $this->note,
-            'sale_products' => SaleProductResource::collection($this->saleProducts)
+            'sale_products' => SaleProductResource::collection($this->saleProducts),
+            'created_by' => $this->user->name
         ];
     }
 }

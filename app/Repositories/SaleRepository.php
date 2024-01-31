@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Enums\PaymentStatus;
 use App\Http\Requests\SaleRequest;
 use App\Models\Sale;
+use Carbon\Carbon;
 
 class SaleRepository extends Repository
 {
@@ -18,7 +19,7 @@ class SaleRepository extends Repository
             'user_id' => auth()->id(),
             'shop_id' => self::shop()->id,
             'customer_id' => $saleRequest->customer_id,
-            'date' => $saleRequest->date ?? now(),
+            'date' => Carbon::parse($saleRequest->date) ?? now(),
             'reference_no' => 'ps-' . date("Ymd") . '-' . date("his"),
             'order_discount' => $saleRequest->order_discount,
             'shipping_cost' => $saleRequest->shipping_cost,
@@ -33,7 +34,7 @@ class SaleRepository extends Repository
     {
         self::update($sale, [
             'customer_id' => $saleRequest->customer_id,
-            'date' => $saleRequest->date ?? now(),
+            'date' => Carbon::parse($saleRequest->date) ?? now(),
             'reference_no' => 'pr-' . date("Ymd") . '-' . date("his"),
             'order_discount' => $saleRequest->order_discount,
             'shipping_cost' => $saleRequest->shipping_cost,
@@ -45,5 +46,13 @@ class SaleRepository extends Repository
         ]);
 
         return $sale;
+    }
+    public static function search($search)
+    {
+        $sales = self::shop()->sales()->when($search, function ($query) use ($search) {
+            $query->where('reference_no', 'Like', "%{$search}%");
+        });
+
+        return $sales;
     }
 }

@@ -15,8 +15,20 @@ class SaleController extends Controller
 {
     public function index()
     {
-        $sales = SaleRepository::getAll();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchSales = SaleRepository::search($search);
+        $total = $searchSales->count();
+        $sales = $searchSales->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Sale List', [
+            'total' => $total,
             'sales' => SaleResource::collection($sales),
         ]);
     }
@@ -37,7 +49,7 @@ class SaleController extends Controller
         if ($grandTotal > $saleRequest->paid_amount) {
             $paymentStatus = PaymentStatus::DUE->value;
         }
-        
+
         $sale->update([
             'grand_total' => $grandTotal,
             'payment_status' => $paymentStatus
@@ -81,7 +93,7 @@ class SaleController extends Controller
             'sale' => SaleResource::make($sale),
         ]);
     }
-    public function delete(Sale $sale)
+    public function destroy(Sale $sale)
     {
         $sale->delete();
         return $this->json('Sale successfully deleted');

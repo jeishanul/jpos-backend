@@ -43,6 +43,10 @@ class Shop extends Model
     {
         return $this->hasMany(Purchase::class);
     }
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
     public function shopUser()
     {
         return $this->belongsToMany(User::class, 'shop_users');

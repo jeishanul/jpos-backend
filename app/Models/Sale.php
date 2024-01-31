@@ -20,6 +20,10 @@ class Sale extends Model
         'payment_status' => PaymentStatus::class,
         'payment_method' => PaymentMethod::class,
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function customer()
     {
         return $this->belongsTo(User::class, 'customer_id');

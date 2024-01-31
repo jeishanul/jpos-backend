@@ -91,6 +91,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{sale}', 'details');
         Route::post('store', 'store');
         Route::put('update/{sale}', 'update');
+        Route::delete('destroy/{sale}', 'destroy');
     });
     // Customer Route
     Route::controller(CustomerController::class)->prefix('customer')->group(function () {
