@@ -49,7 +49,7 @@ class BrandController extends Controller
             'brand' => BrandResource::make($brand),
         ]);
     }
-    public function delete(Brand $brand)
+    public function destroy(Brand $brand)
     {
         $brand->delete();
         return $this->json('Brand successfully deleted');

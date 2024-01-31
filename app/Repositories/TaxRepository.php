@@ -14,7 +14,7 @@ class TaxRepository extends Repository
     public static function storeByRequest(TaxRequest $taxRequest): Tax
     {
         return self::create([
-            'created_by' => auth()->id(),
+            'user_id' => auth()->id(),
             'shop_id' => self::shop()->id,
             'name' => $taxRequest->name,
             'rate' => $taxRequest->rate,

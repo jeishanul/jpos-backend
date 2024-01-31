@@ -12,8 +12,20 @@ class CurrencyController extends Controller
 {
     public function index()
     {
-        $currencies = CurrencyRepository::getAll();
+        $request = request();
+        $search = $request->search;
+        $page = $request->page;
+        $take = $request->take;
+        $skip = ($page * $take) - $take;
+
+        $searchCurrencies = CurrencyRepository::search($search);
+        $total = $searchCurrencies->count();
+        $currencies = $searchCurrencies->when($page && $take, function ($query) use ($skip, $take) {
+            $query->skip($skip)->take($take);
+        })->get();
+
         return $this->json('Currency List', [
+            'total' => $total,
             'currencies' => CurrencyResource::collection($currencies),
         ]);
     }
@@ -37,7 +49,7 @@ class CurrencyController extends Controller
             'currency' => CurrencyResource::make($currency),
         ]);
     }
-    public function delete(Currency $currency)
+    public function destroy(Currency $currency)
     {
         $currency->delete();
         return $this->json('Currency successfully deleted');

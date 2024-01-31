@@ -25,7 +25,7 @@ class BrandRepository extends Repository
         }
 
         return self::create([
-            'created_by' => auth()->id(),
+            'user_id' => auth()->id(),
             'shop_id' => self::shop()->id,
             'name' => $brandRequest->name,
             'status' => $brandRequest->status,

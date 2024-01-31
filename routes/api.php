@@ -53,6 +53,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{brand}', 'details');
         Route::post('store', 'store');
         Route::put('update/{brand}', 'update');
+        Route::delete('destroy/{brand}', 'destroy');
     });
     // Unit Route
     Route::controller(UnitController::class)->prefix('unit')->group(function () {
@@ -109,6 +110,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('details/{currency}', 'details');
         Route::post('store', 'store');
         Route::put('update/{currency}', 'update');
+        Route::delete('destroy/{currency}', 'destroy');
     });
     // Settings Route
     Route::put('settings/update', [SettingsController::class, 'update']);

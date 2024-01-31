@@ -33,4 +33,12 @@ class CurrencyRepository extends Repository
 
         return $currency;
     }
+    public static function search($search)
+    {
+        $currencies = self::shop()->currencies()->when($search, function ($query) use ($search) {
+            $query->where('name', 'Like', "%{$search}%");
+        });
+
+        return $currencies;
+    }
 }

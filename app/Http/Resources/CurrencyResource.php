@@ -19,7 +19,9 @@ class CurrencyResource extends JsonResource
             'name' => $this->name,
             'code' => $this->code,
             'symbol' => $this->symbol,
-            'status' => $this->status
+            'status' => $this->status,
+            'created_by' => $this->user->name,
+            'created_at' => dateFormat($this->created_at)
         ];
     }
 }

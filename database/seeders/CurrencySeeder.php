@@ -17,27 +17,33 @@ class CurrencySeeder extends Seeder
         $currencys = [
             [
                 'shop_id' => 1,
-                'created_by' => 2,
+                'user_id' => 2,
                 'name' => 'US Dollar',
                 'code' => 'USD',
                 'symbol' => '$',
-                'status' => Status::ACTIVE->value
+                'status' => Status::ACTIVE->value,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'shop_id' => 1,
-                'created_by' => 2,
+                'user_id' => 2,
                 'name' => 'Euro',
                 'code' => 'EUR',
                 'symbol' => '€',
-                'status' => Status::ACTIVE->value
+                'status' => Status::ACTIVE->value,
+                'created_at' => now(),
+                'updated_at' => now()
             ],
             [
                 'shop_id' => 1,
-                'created_by' => 2,
+                'user_id' => 2,
                 'name' => 'Taka',
                 'code' => 'BDT',
                 'symbol' => '৳',
-                'status' => Status::ACTIVE->value
+                'status' => Status::ACTIVE->value,
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ];
         

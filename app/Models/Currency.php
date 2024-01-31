@@ -18,4 +18,8 @@ class Currency extends Model
     protected $casts = [
         'status' => Status::class,
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
