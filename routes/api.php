@@ -30,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 // Authentication Route
 Route::controller(UserAuthenticationController::class)->group(function () {
     Route::post('login', 'login');
+    Route::post('password-resets', 'passwordResets');
+    Route::post('password-update', 'passwordUpdate');
+    Route::post('token-check', 'tokenCheck');
 });
 // Settings Route
 Route::get('settings', [SettingsController::class, 'index']);
