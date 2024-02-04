@@ -10,7 +10,7 @@ class UnitRepository extends Repository
     /**
      * A description of the entire PHP function.
      *
-     * @return datatype
+     * @return Unit::class
      */
     public static function model()
     {

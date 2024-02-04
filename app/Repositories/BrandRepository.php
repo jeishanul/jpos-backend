@@ -21,7 +21,6 @@ class BrandRepository extends Repository
      * Store a brand by request.
      *
      * @param BrandRequest $brandRequest The brand request object.
-     * @throws Some_Exception_Class Description of exception.
      * @return Brand The created brand object.
      */
     public static function storeByRequest(BrandRequest $brandRequest): Brand

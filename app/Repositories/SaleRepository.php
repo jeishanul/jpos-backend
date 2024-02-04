@@ -22,7 +22,6 @@ class SaleRepository extends Repository
      * Store sale by request.
      *
      * @param SaleRequest $saleRequest description
-     * @throws Some_Exception_Class description of exception
      * @return Sale
      */
     public static function storeByRequest(SaleRequest $saleRequest): Sale

@@ -7,6 +7,11 @@ use App\Models\SaleProduct;
 
 class SaleProductRepository extends Repository
 {
+    /**
+     * A description of the entire PHP function.
+     *
+     * @return SaleProduct::class
+     */
     public static function model()
     {
         return SaleProduct::class;
@@ -17,7 +22,6 @@ class SaleProductRepository extends Repository
      * @param datatype $saleId description
      * @param datatype $productId description
      * @param datatype $productQty description
-     * @throws Some_Exception_Class description of exception
      * @return SaleProduct
      */
     public static function storeByRequest($saleId, $productId, $productQty): SaleProduct

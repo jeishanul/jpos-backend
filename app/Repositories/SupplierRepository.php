@@ -11,9 +11,7 @@ class SupplierRepository extends Repository
     /**
      * A description of the entire PHP function.
      *
-     * @param datatype $paramname description
-     * @throws Some_Exception_Class description of exception
-     * @return Some_Return_Value
+     * @return User::class
      */
     public static function model()
     {

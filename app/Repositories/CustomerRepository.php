@@ -10,9 +10,9 @@ class CustomerRepository extends Repository
 {
     public static $path = "/customer";
     /**
-     * Retrieve the model for the PHP function.
+     * A description of the entire PHP function.
      *
-     * @return string
+     * @return User::class
      */
     public static function model()
     {

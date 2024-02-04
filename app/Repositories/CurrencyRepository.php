@@ -8,10 +8,9 @@ use App\Models\Currency;
 class CurrencyRepository extends Repository
 {
     /**
-     * Store a new currency using the given request.
+     * A description of the entire PHP function.
      *
-     * @param CurrencyRequest $currencyRequest The currency request data
-     * @return Currency The newly created currency
+     * @return Currency::class
      */
     public static function model()
     {

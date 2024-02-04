@@ -23,7 +23,6 @@ class MediaRepository extends Repository
      * @param UploadedFile $file description
      * @param string $path description
      * @param string|null $type description
-     * @throws Some_Exception_Class description of exception
      * @return Media
      */
     public static function storeByRequest(UploadedFile $file, string $path, string $type = null): Media
@@ -73,7 +72,6 @@ class MediaRepository extends Repository
      * @param string $path The path where the file will be stored.
      * @param string|null $type The type of the media (optional).
      * @param mixed|null $media The existing media object (optional).
-     * @throws Some_Exception_Class A description of the exception that can be thrown.
      * @return Media The updated or created media object.
      */
     public static function updateOrCreateByRequest(UploadedFile $file, string $path, string $type = null, $media = null): Media

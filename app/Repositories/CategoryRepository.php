@@ -9,9 +9,9 @@ class CategoryRepository extends Repository
 {
     public static $path = '/category';
     /**
-     * Retrieve the model for the PHP function.
+     * A description of the entire PHP function.
      *
-     * @return string
+     * @return Category::class
      */
     public static function model()
     {

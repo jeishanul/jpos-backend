@@ -23,7 +23,6 @@ class PurchaseRepository extends Repository
      * Store a new purchase using the given purchase request.
      *
      * @param PurchaseRequest $purchaseRequest The purchase request to store
-     * @throws Some_Exception_Class description of exception
      * @return Purchase The newly created purchase
      */
     public static function storeByRequest(PurchaseRequest $purchaseRequest): Purchase

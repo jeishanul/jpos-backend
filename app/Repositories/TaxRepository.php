@@ -8,10 +8,9 @@ use App\Models\Tax;
 class TaxRepository extends Repository
 {
     /**
-     * Store a new tax record based on the given TaxRequest.
+     * A description of the entire PHP function.
      *
-     * @param TaxRequest $taxRequest The tax request data
-     * @return Tax The newly created tax record
+     * @return Tax::class
      */
     public static function model()
     {
